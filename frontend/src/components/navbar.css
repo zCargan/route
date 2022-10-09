@@ -1,0 +1,117 @@
+.fa-times {
+    color: #3d3939;
+    font-size: 2rem;
+}
+
+.fa-bars{
+    font-size: 2rem;
+    color: #3d3939;
+}
+
+.active {
+    color: #3d3939;
+}
+
+
+.menu-list{
+    display: flex;
+    align-items: center;
+    padding: 8px 11px 8px 18px;
+    border-bottom: 4px #3d3939 solid;
+    justify-content: space-around;
+}
+
+.navbar-logo{
+    float: right;
+}
+
+.nav-links-mobile {
+    display: block;
+    text-align: center;
+    margin: 7px auto;
+    text-decoration: none;
+    font-size: 2em;
+    background-color: transparent;
+    color: #fff;
+    padding: 11px 20px;
+    transition: all 0.3s ease-out;
+}
+
+.nav-links-mobile-active {
+    display: block;
+    text-align: center;
+    margin: 7px auto;
+    text-decoration: none;
+    font-size: 2em;
+    background-color: #a09f9f;
+    color: #fff;
+    padding: 11px 20px;
+    transition: all 0.3s ease-out;
+}
+
+.nav-links{
+    display: block;
+    text-align: center;
+    margin: 7px auto;
+    text-decoration: none;
+    font-size: 2em;
+    background-color: transparent;
+    color: #fff;
+    padding: 11px 20px;
+    transition: all 0.3s ease-out;
+}
+
+.nav-links-active {
+    display: block;
+    text-align: center;
+    margin: 7px auto;
+    text-decoration: none;
+    font-size: 2em;
+    background-color: #a09f9f;
+    color: #fff;
+    padding: 11px 20px;
+    transition: all 0.3s ease-out; 
+}
+
+.nav-item{
+    background-color: #d9d9d9;
+    align-content: center;
+}
+
+.navbar .menu-list{
+    background-color: #655b5b;
+    width: 128px;
+    height: 100%;
+    
+}
+
+.navbar .nav-list{
+    display: none;
+}
+
+.navbar-active {
+    background-color: #655b5b;
+    width: auto;
+    height: 100%;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+li{
+    text-align: center;
+}
+
+.nav-links:link, .nav-links:visited, .nav-links-mobile:link, .nav-links-mobile:visited{
+    text-decoration: none;
+    color: #3d3939;
+}
+
+.nav-links:link:hover, .nav-links:visited:hover, .nav-links-mobile:link:hover, .nav-links-mobile:visited:hover{
+    text-decoration: none;
+    color: white;
+    transition: 250ms;
+    background-color: #a09f9f;
+}

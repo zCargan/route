@@ -1,0 +1,10 @@
+body{
+    background-color: #3d3939;
+    background-image: url("./logoNewMe.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    width: auto;
+    height: 750px;
+}
+
