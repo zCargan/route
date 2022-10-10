@@ -1,4 +1,5 @@
 import React from 'react';
+import NewObjectif from './NewObjectif';
 
 const Objectif = ({ objectif }) => {
 

@@ -2,11 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
+import NewObjectif from '../components/NewObjectif';
 import Objectif from '../components/Objectif';
 
 const Api = () => {
     const [data, setData] = useState([])
-    const [hello, setHello] = useState("Hello les amis");
     useEffect(() => {
         axios
             .get("http://localhost:3010/objectif")
@@ -36,6 +36,9 @@ const Api = () => {
                 } */}
                 {/* obj est comment je souhaite appeller individuellement chaque object */}
             </ul>
+            <div>
+                <NewObjectif />
+            </div>
         </div >
     )
     //=> <li key={index}> Objectif : {obj.objectif}</li>

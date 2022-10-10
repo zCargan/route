@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Index from './pages/Index';
 import About from './pages/About';
 import Api from './pages/Api';
+import Inscription from './pages/Inscription';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/api" element={<Api />}></Route>
         {/* page par défault  */}
         <Route path="*" element={<Index />} />
+        <Route path="/inscription" element={<Inscription />}></Route>
       </Routes>
     </BrowserRouter>
   );
