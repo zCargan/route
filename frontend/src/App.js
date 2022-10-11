@@ -1,19 +1,29 @@
-//import logo from './logoNewMe.png';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Index from './pages/Index';
+import About from './pages/About';
+import Api from './pages/Api';
+import Inscription from './pages/Inscription';
 import Navbar from './components/navbar';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Default from './pages/default';
 
-function App() {
+
+const App = () => {
   return (
-    <>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" exact />
-        </Routes>
-      </Router>
-    </>
+    
+    <BrowserRouter>
+          <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Default />} />
+        <Route path="/about" element={<About />}></Route>
+        <Route path="/objectifs" element={<Api />}/>
+        {/* page par défault  */}
+        <Route path="*" element={<Default />} />
+        <Route path="/inscription" element={<Inscription />}/>
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

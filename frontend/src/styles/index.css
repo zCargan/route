@@ -1,0 +1,33 @@
+.bouton_envie {
+    background-color: red;
+}
+
+.form_connection {
+    background-color: red;
+}
+
+.index_accueil {
+    text-align: center;
+}
+
+.navigation {
+    background-color: green;
+}
+
+.page_index {
+    background-color: blue;
+}
+
+.button_new_obj {
+    background-color: yellow;
+}
+body{
+    background-color: #3d3939;
+    background-image: url("../images/logoNewMe.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    width: auto;
+    height: 750px;
+}
+

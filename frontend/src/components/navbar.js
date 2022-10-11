@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { NavLink } from 'react-router-dom'
-import logo from '../logoNewMe2.ico';
-import "./navbar.css"
+import logo from '../images//logoNewMe2.ico';
+import "../styles/navbar.css"
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -21,7 +21,7 @@ function Navbar() {
             </div>
             <ul className="nav-list">
                 <li className='nav-item'>
-                    <NavLink to='/' className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
+                    <NavLink to='/home' className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
                         Home
                     </NavLink>
                 </li>
@@ -41,12 +41,12 @@ function Navbar() {
                     </NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink to="/profil" className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
+                    <NavLink to="/api" className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
                         Profil
                     </NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink to="/sign-up" className={(state) => state.isActive ? 'nav-links-mobile-active' : 'nav-links-mobile'}>
+                    <NavLink to="/inscription" className={(state) => state.isActive ? 'nav-links-mobile-active' : 'nav-links-mobile'}>
                         Sign Up
                     </NavLink>
                 </li>
