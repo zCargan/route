@@ -3,12 +3,12 @@ import { Navigate } from 'react-router-dom';
 
 const Connection = () => {
 
-    {/*=========================================== VARIABLES DE CONNECTION ===========================================*/ }
+    /*=========================================== VARIABLES DE CONNECTION ===========================================*/
     const [email, setEmail] = useState(null)
     const [mdp, setMdp] = useState(null)
     const [goToInscription, setGoToInscription] = useState(false);
 
-    {/*=========================================== RECUPERE LES VARIABLES DE CONNECTION ===========================================*/ }
+    /*=========================================== RECUPERE LES VARIABLES DE CONNECTION ===========================================*/
     const test = async (e) => {
         e.preventDefault();
         const values = {
@@ -19,7 +19,7 @@ const Connection = () => {
     }
 
 
-    {/*=========================================== FONCTION DE REDIRECTION ===========================================*/ }
+    /*=========================================== FONCTION DE REDIRECTION ===========================================*/
     if (goToInscription) {
         return <Navigate to="/inscription" />
     }
