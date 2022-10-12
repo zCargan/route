@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Connection = () => {
 
@@ -11,11 +12,16 @@ const Connection = () => {
     {/*=========================================== RECUPERE LES VARIABLES DE CONNECTION ===========================================*/ }
     const test = async (e) => {
         e.preventDefault();
-        const values = {
-            email,
-            mdp
-        }
-        console.log({ values })
+        let values = {
+            email :email,
+            mdp :mdp
+        };
+        axios
+            .post("http://localhost:3010/user", values)
+            .then(response => {
+                console.log({ response })
+            });
+        console.log( values )
     }
 
 

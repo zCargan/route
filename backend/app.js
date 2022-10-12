@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 const Objectif = require('./models/objectif');
+const User = require('./models/user');
+var bodyParser = require('body-parser')
 
 const express = require('express');
 const app = express();
+app.use(bodyParser.json())
 
 //=============================================DB==================================
 mongoose.connect('mongodb+srv://Chapoune:chayae123@cluster0.avokmpx.mongodb.net/?retryWrites=true&w=majority',
@@ -22,16 +25,6 @@ app.use((req, res, next) => {
 
 
 //=============================================ROUTE==================================
-app.post('/api/stuff', (req, res, next) => {
-    delete req.body_id;
-    const thing = new Thing({
-        ...req.body
-    });
-    thing.save()
-    .then(()=> res.status(201).json({ message: 'Objet enregistré !'}))
-    .catch(error => res.status(400).json({ error }));
-});
-
 
 app.post('/api/objectif', (req, res, next) => {
     const obj = new Objectif({
@@ -42,32 +35,31 @@ app.post('/api/objectif', (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 });
 
-
-
-app.get('/api/stuff/:id', (req, res, next) => {
-    Objectif.findOne({ _id: req.params.id })
-    .then(Objectif => res.status(200).json(Objectif))
-    .catch(error => res.status(404).json({ error }));
-});
-
 app.get('/objectif', (req, res, next) => {
     Objectif.find()
     .then(response => res.status(200).json(response))
     .catch(error => res.status(400).json({ error }));
 });
 
-app.put('/api/stuff/:id', (req, res, next) => {
-    Thing.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id
+app.post('/user', (req, res) => {
+    console.log(req.body.email)
+     User.findOne({ email: req.body.email })
+     .then(response =>  {
+        if (!response) {
+        console.log("Utilisateur non trouvé !")
+
+        return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+      }
+        if (req.body.mdp == response.password){
+            console.log("youpie")
+            return res.status(200).json(response)
+        }
+        else{
+            console.log("mot de passe incorrecte")
+            return res.status(401).json({ error: 'Mot de passe incorrecte !' });
+        }
     })
-    .then(() => res.status(200).json({ message: 'Objet modifié !'}))
-    .catch(error => res.status(400).json({ error }));
+     .catch(error => res.status(400).json({ error }));
 });
-
-app.delete('/api/stuff/:id', (req, res, next) => {
-    Thing.deleteOne({ _id: req.params.id })
-    .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
-    .catch(error => res.status(400).json({ error }));
-});
-
 
 module.exports = app //export la constante pour que l'on puisse l'utiliser partout
