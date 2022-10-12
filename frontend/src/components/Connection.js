@@ -26,56 +26,27 @@ const Connection = () => {
 
 
     return (
-            <div id="bloc_user">
-                <div id="connection">
-                    <p><h2>Se connecter</h2></p>
-                    <form className='form_connection'>
-                        <div>
-                            <p>Adresse email du compte</p>
-                            <input type="string" placeholder='Email du compte' onChange={(e) => setEmail(e.target.value)} />
-                        </div>
-                        <div>
-                            <p>Mot de passe du compte</p>
-                            <input type="string" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
-                        </div>
-                        <div>
-                            <button onClick={test}>
-                                Connection
-                            </button>
-                        </div>
-                        <div>
-                            <p>
-                                Mot de passe oublié?
-                            </p>
-                            <button>
-                                Mot de passe oublié?
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div id="inscription">
-                    <p><h2>Pas encore de compte ? Inscrivez-vous !</h2></p>
-                    <form className='form_inscription'>
-                        <div>
-                            <p>Nom d'utilisateur</p>
-                            <input type="string" placeholder="Nom d'utilisateur" onChange={(e) => setMdp(e.target.value)} />
-                        </div>
-                        <div>
-                            <p>Adresse email du compte</p>
-                            <input type="string" placeholder='Email du compte' onChange={(e) => setEmail(e.target.value)} />
-                        </div>
-                        <div>
-                            <p>Mot de passe du compte</p>
-                            <input type="string" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
-                        </div>
-                        <div>
-                            <p>Confirmer mot de passe</p>
-                            <input type="string" placeholder='Confirmer le mot de passe' onChange={(e) => setMdp(e.target.value)} />
-                        </div>
 
+                <div id="connection">
+                    <h2>Se connecter</h2>
+                    <form className='form_connection'>
+                        <div className="text_zone">
+                            <i class="fa-sharp fa-solid fa-envelope"></i>
+                            <input type="string" placeholder='Email du compte' onChange={(e) => setEmail(e.target.value)} />
+                        </div>
+                        <div className="text_zone">
+                            <i class="fa-sharp fa-solid fa-lock"></i>
+                            <input type="string" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
+                        </div>
+                        <div className="text_zone_button" onClick={test}>
+                                Connection
+                        </div>
+                        <div className="text_zone_button">
+                                Mot de passe oublié ?
+                        </div>
                     </form>
                 </div>
-            </div>
+
     );
 };
 

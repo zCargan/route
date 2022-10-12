@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import Objectifs from './pages/Objectifs';
-import Inscription from './pages/Inscription';
+import Page_compte from './pages/Page_compte';
 import Navbar from './components/navbar';
 import Default from './pages/default';
 import './styles/App.css'
@@ -22,7 +22,7 @@ const App = () => {
             <Route path="/objectifs" element={<Objectifs />} className="objectifs"/>
             {/* page par défault  */}
             <Route path="*" element={<Default />} />
-            <Route path="/inscription" element={<Inscription />}/>
+            <Route path="/inscription" element={<Page_compte />}/>
           </Routes>
           </div>
       </BrowserRouter>

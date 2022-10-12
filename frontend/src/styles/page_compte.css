@@ -1,0 +1,7 @@
+#bloc_user{
+    padding: 3%;
+    margin: auto;
+    border-radius: 30px;
+    width: 95%;
+    display: flex;
+}
