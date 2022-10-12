@@ -1,0 +1,17 @@
+
+.index_accueil {
+    text-align: center;
+}
+
+body{
+    background-color: #3d3939;
+    background-image: url("../images/logoNewMe.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    width: auto;
+    background-position-x: center;
+    background-size: 30%;
+    height: 1000px;
+}
+

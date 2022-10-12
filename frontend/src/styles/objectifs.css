@@ -1,0 +1,34 @@
+.objectifs {
+    background-color: #d9d9d9;
+    color: black;
+    border-radius: 5px;
+    border: black 1px solid;
+    font-size: 40px;
+    margin: 10px;
+    position: relative;
+}
+
+ul{
+    display: inline-block;
+}
+
+.fa-circle-plus {
+    font-size: 2rem;
+    color: #3d3939;
+    background-color: #d9d9d9;
+    transition: all 0.3s ease-out;
+    border-radius: 110%;
+    position: absolute;
+    bottom:0;
+    right: 0.5%;
+}
+
+.fa-circle-plus:hover{
+    color: #d9d9d9;
+    background-color: #3d3939;
+}
+
+p{
+    margin: 0;
+    padding-right: 40px;
+}

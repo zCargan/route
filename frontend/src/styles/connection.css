@@ -1,0 +1,24 @@
+#bloc_user{
+    padding: 3%;
+    margin: auto;
+    border-radius: 30px;
+    width: 95%;
+}
+
+#connection{
+    margin: 3%;
+    padding: 3%;
+    background-color: #a09f9f;
+    width: 40%;
+    float:left;
+    border-radius: 30px;
+}
+
+#inscription{
+    margin: 3%;
+    padding: 3%;
+    background-color: #a09f9f;
+    width: 40%;
+    margin-left: 50%;
+    border-radius: 30px;
+}
