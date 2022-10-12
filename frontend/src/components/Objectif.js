@@ -1,5 +1,5 @@
 import React from 'react';
-import NewObjectif from './NewObjectif';
+
 
 const Objectif = ({ objectif }) => {
 
@@ -9,7 +9,7 @@ const Objectif = ({ objectif }) => {
 
     return (
         <div>
-            <div>
+            <div className='obj'>
                 <p>
                     ============================================
                 </p>

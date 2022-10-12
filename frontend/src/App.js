@@ -1,26 +1,25 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Index from './pages/Index';
 import About from './pages/About';
 import Api from './pages/Api';
 import Inscription from './pages/Inscription';
-import Navbar from './components/navbar';
+import Navbar from './components/Navbar';
 import Default from './pages/default';
 
 
 const App = () => {
   return (
-    
+
     <BrowserRouter>
-          <Navbar />
+      <Navbar />
 
       <Routes>
         <Route path="/" element={<Default />} />
         <Route path="/about" element={<About />}></Route>
-        <Route path="/objectifs" element={<Api />}/>
+        <Route path="/objectifs" element={<Api />} />
         {/* page par défault  */}
         <Route path="*" element={<Default />} />
-        <Route path="/inscription" element={<Inscription />}/>
+        <Route path="/inscription" element={<Inscription />} />
       </Routes>
     </BrowserRouter>
   );

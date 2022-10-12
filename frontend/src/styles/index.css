@@ -28,6 +28,8 @@ body{
     background-position: center;
     display: flex;
     width: auto;
-    height: 700px;
+    background-position-x: center;
+    background-size: 30%;
+    height: 1000px;
 }
 

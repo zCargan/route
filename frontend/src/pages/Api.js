@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 import NewObjectif from '../components/NewObjectif';
 import Objectif from '../components/Objectif';
 
@@ -17,6 +17,7 @@ const Api = () => {
             <div>
 
                 <div>
+                    <Navbar />
                 </div>
             </div>
             <ul>
