@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "../styles/connection.css"
+import "../styles/App.css"
 
 const Connection = () => {
 
-    /*=========================================== VARIABLES DE CONNECTION ===========================================*/ 
+
     const [email, setEmail] = useState(null)
     const [mdp, setMdp] = useState(null)
 
-    /*=========================================== RECUPERE LES VARIABLES DE CONNECTION ===========================================*/ 
     const test = async (e) => {
         e.preventDefault();
         let values = {
@@ -16,7 +16,7 @@ const Connection = () => {
             mdp :mdp
         };
         axios
-            .post("http://localhost:3010/user", values)
+            .post("http://localhost:3001/user", values)
             .then(response => {
                 console.log({ response })
             });
@@ -24,7 +24,6 @@ const Connection = () => {
     }
 
 
-    /*=========================================== FONCTION DE REDIRECTION ===========================================*/ 
 
     return (
             <div id="bloc_user">
