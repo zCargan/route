@@ -19,9 +19,6 @@ function Navbar() {
                         <img src={logo} alt="NewMeLogo" />
                     </NavLink>
                 </div>
-                <p>
-                    Hello
-                </p>
                 <ul className="nav-list">
                     <li className='nav-item'>
                         <NavLink to='/home' className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
