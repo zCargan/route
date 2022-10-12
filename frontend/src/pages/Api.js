@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import NewObjectif from '../components/NewObjectif';
 import Objectif from '../components/Objectif';
 
@@ -14,11 +13,6 @@ const Api = () => {
 
     return (
         < div >
-            <div>
-
-                <div>
-                </div>
-            </div>
             <ul>
                 {
                     data.map((objectif, index) => (

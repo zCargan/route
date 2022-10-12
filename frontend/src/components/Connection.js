@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import axios from 'axios';
+import "../styles/connection.css"
 
 const Connection = () => {
 
-    {/*=========================================== VARIABLES DE CONNECTION ===========================================*/ }
+    /*=========================================== VARIABLES DE CONNECTION ===========================================*/ 
     const [email, setEmail] = useState(null)
     const [mdp, setMdp] = useState(null)
-    const [goToInscription, setGoToInscription] = useState(false);
 
-    {/*=========================================== RECUPERE LES VARIABLES DE CONNECTION ===========================================*/ }
+    /*=========================================== RECUPERE LES VARIABLES DE CONNECTION ===========================================*/ 
     const test = async (e) => {
         e.preventDefault();
         let values = {
@@ -25,58 +24,59 @@ const Connection = () => {
     }
 
 
-    {/*=========================================== FONCTION DE REDIRECTION ===========================================*/ }
-    if (goToInscription) {
-        return <Navigate to="/inscription" />
-    }
-
-
+    /*=========================================== FONCTION DE REDIRECTION ===========================================*/ 
 
     return (
-        <div>
-            <form className='form_connection'>
-                <div>
-                    <p>Adresse email du compte</p>
-                    <input type="string" placeholder='Email du compte' onChange={(e) => setEmail(e.target.value)} />
+            <div id="bloc_user">
+                <div id="connection">
+                    <p><h2>Se connecter</h2></p>
+                    <form className='form_connection'>
+                        <div>
+                            <p>Adresse email du compte</p>
+                            <input type="string" placeholder='Email du compte' onChange={(e) => setEmail(e.target.value)} />
+                        </div>
+                        <div>
+                            <p>Mot de passe du compte</p>
+                            <input type="string" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
+                        </div>
+                        <div>
+                            <button onClick={test}>
+                                Connection
+                            </button>
+                        </div>
+                        <div>
+                            <p>
+                                Mot de passe oublié?
+                            </p>
+                            <button>
+                                Mot de passe oublié?
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <p>Mot de passe du compte</p>
-                    <input type="string" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
-                </div>
-                <div>
-                    <button onClick={test}>
-                        Connection
-                    </button>
-                </div>
-                <div>
-                    <p>
-                        Mot de passe oublié?
-                    </p>
-                    <button>
-                        Mot de passe oublié?
-                    </button>
-                </div>
-                <div>
-                    <p>
-                        pas de compte?
-                    </p>
-                    <button onClick={() => { setGoToInscription(true) }}>
-                        Me créer un compte!
-                    </button>
-                </div>
-            </form>
+                <div id="inscription">
+                    <p><h2>Pas encore de compte ? Inscrivez-vous !</h2></p>
+                    <form className='form_inscription'>
+                        <div>
+                            <p>Nom d'utilisateur</p>
+                            <input type="string" placeholder="Nom d'utilisateur" onChange={(e) => setMdp(e.target.value)} />
+                        </div>
+                        <div>
+                            <p>Adresse email du compte</p>
+                            <input type="string" placeholder='Email du compte' onChange={(e) => setEmail(e.target.value)} />
+                        </div>
+                        <div>
+                            <p>Mot de passe du compte</p>
+                            <input type="string" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
+                        </div>
+                        <div>
+                            <p>Confirmer mot de passe</p>
+                            <input type="string" placeholder='Confirmer le mot de passe' onChange={(e) => setMdp(e.target.value)} />
+                        </div>
 
-
-            {/*=========================================== AFFICHE EN CONSOLE LA VALEUR DE L'INPUT ===========================================*/}
-            {/* <div>
-                <p>Adresse email du compte</p>
-                <input type="string" placeholder='Email du compte' onChange={(e) => setName(e.target.value)} />
+                    </form>
+                </div>
             </div>
-            <div>
-                <button onClick={sayName}>Click</button>
-            </div> */}
-
-        </div >
     );
 };
 

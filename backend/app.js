@@ -51,11 +51,11 @@ app.post('/user', (req, res) => {
         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
         if (req.body.mdp == response.password){
-            console.log("youpie")
+            console.log("Vous êtes connecté")
             return res.status(200).json(response)
         }
         else{
-            console.log("mot de passe incorrecte")
+            console.log("Mot de passe incorrecte")
             return res.status(401).json({ error: 'Mot de passe incorrecte !' });
         }
     })
