@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
+
 const Objectif = require('./models/objectif');
 const User = require('./models/user');
-var bodyParser = require('body-parser')
+const UserTest = require('./models/user_test')
+
 const express = require('express');
 const app = express();
-app.use(bodyParser.json())
+app.use(express.json())
 const cors = require('cors');
 
 const userRoutes = require('./routes/user');
@@ -41,7 +43,6 @@ app.post('/api/stuff', (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 });
 
-
 app.post('/api/objectif', (req, res, next) => {
     const obj = new Objectif({
         ...req.body
@@ -56,6 +57,42 @@ app.get('/objectif', (req, res, next) => {
     .then(response => res.status(200).json(response))
     .catch(error => res.status(400).json({ error }));
 });
+
+app.post('/email', (req, res) => {
+    UserTest.findOne({ email: req.body.email })
+        .then(response => {
+            if (!response) {
+                return res.send("ok")
+            }
+            else {
+                return res.send("not ok")
+            }
+        })
+})
+
+app.post('/inscription', (req, res) => {
+    console.log(req.body)
+    const test = new UserTest({
+        ...req.body
+    })
+    test.save()
+        .then(() => res.status(201).json({ message: 'utilisateur ajouté' }))
+        .catch(error => res.status(400).json({ error }));
+})
+
+app.post('/username', (req, res) => {
+    console.log(req.body)
+    UserTest.findOne({ username: req.body.username })
+        .then(response => {
+            if (!response) {
+                return res.send("ok")
+
+            }
+            else {
+                return res.send("not ok")
+            }
+        })
+})
 
 app.post('/user', (req, res) => {
     console.log(req.body.email)

@@ -6,28 +6,32 @@
     border-radius: 30px;
 }
 
+#inscription h2{
+    text-align: center;
+}
+
 .text_zone{
     border-radius: 8px;
     margin: 5px;
-    width: 60%;
+    width: 95%;
     background-color: #655b5b;
-    margin-left: 20%;
 
 }
 
 .text_zone input{
     background-color: #655b5b;
     border:transparent;
+    color: #d9d9d9;
 }
 .text_zone input::placeholder{
     color: #d9d9d9;
 }
+
 .text_zone_button{
-    border-radius: 8px;
+    border-radius: 10px;
     margin: 5px;
-    width: 60%;
+    width: 95%;
     background-color: #980012;
-    margin-left: 20%;
     transition: all 0.3s ease-out; 
     text-align: center;
     color: #d9d9d9;
