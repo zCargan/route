@@ -1,4 +1,3 @@
-
 #connection{
     margin: 3%;
     padding: 3%;
@@ -9,23 +8,23 @@
 }
 
 .text_zone{
-    border-radius: 8px;
+    border-radius: 10px;
     margin: 5px;
-    width: 60%;
+    width: 90%;
     background-color: #655b5b;
-    margin-left: 20%;
     padding: 2px;
 }
 
 .text_zone input{
     background-color: #655b5b;
     border:transparent;
+    width: 90%;
 }
 .text_zone input::placeholder{
     color: #d9d9d9;
 }
 .text_zone_button{
-    border-radius: 8px;
+    border-radius: 10px;
     margin: 5px;
     width: 60%;
     background-color: #980012;
