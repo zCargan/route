@@ -13,10 +13,12 @@ const userRoutes = require('./routes/user');
 
 //=============================================DB==================================
 mongoose.connect('mongodb+srv://Chapoune:chayae123@cluster0.avokmpx.mongodb.net/?retryWrites=true&w=majority',
-{ useNewUrlParser: true,
-useUnifiedTopology: true})
-.then(() => console.log('Connexion à MongoDB réussie !'))
-.catch(()=> console.log('Connexion à MongoDB echoué !'));
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => console.log('Connexion à MongoDB réussie !'))
+    .catch(() => console.log('Connexion à MongoDB echoué !'));
 
 
 //=============================================CORS==================================
@@ -48,8 +50,8 @@ app.post('/api/objectif', (req, res, next) => {
         ...req.body
     });
     obj.save()
-    .then(()=> res.status(201).json({ message: 'Objectif ajouté !'}))
-    .catch(error => res.status(400).json({ error }));
+        .then(() => res.status(201).json({ message: 'Objectif ajouté !' }))
+        .catch(error => res.status(400).json({ error }));
 });
 
 app.get('/objectif', (req, res, next) => {
