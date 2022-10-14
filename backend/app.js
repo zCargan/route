@@ -55,9 +55,18 @@ app.post('/api/objectif', (req, res, next) => {
 });
 
 app.get('/objectif', (req, res, next) => {
-    Objectif.find()
-    .then(response => res.status(200).json(response))
-    .catch(error => res.status(400).json({ error }));
+    let filtreQueryKey = Object.keys(req.query)[0];
+    let filtreQueryValue = Object.values(req.query)[0];
+    let query_json = {[filtreQueryKey]: filtreQueryValue}
+    if (filtreQueryKey != undefined){
+        Objectif.find({[filtreQueryKey]: {$regex : new RegExp(filtreQueryValue, "i")}})
+        .then(response => res.status(200).json(response))
+        .catch(error => res.status(400).json({ error }));
+    } else {
+        Objectif.find()
+        .then(response => res.status(200).json(response))
+        .catch(error => res.status(400).json({ error }));
+    }
 });
 
 app.post('/email', (req, res) => {
