@@ -41,7 +41,7 @@ function Navbar() {
                         </NavLink>
                     </li>
                     <li className='nav-item'>
-                        <NavLink to="/api" className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
+                        <NavLink to="/profil" className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
                             Profil
                         </NavLink>
                     </li>
