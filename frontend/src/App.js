@@ -5,6 +5,8 @@ import Objectifs from './pages/Objectifs';
 import Page_compte from './pages/Page_compte';
 import Navbar from './components/navbar';
 import Default from './pages/default';
+import Profil from './pages/Profil';
+
 import './styles/App.css'
 
 
@@ -22,6 +24,7 @@ const App = () => {
             <Route path="/objectifs" element={<Objectifs />} className="objectifs"/>
             {/* page par défault  */}
             <Route path="*" element={<Default />} />
+            <Route path="/profil" element={<Profil />} />
             <Route path="/inscription" element={<Page_compte />}/>
           </Routes>
           </div>

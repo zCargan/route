@@ -10,22 +10,22 @@ function Objectifs() {
     let query_choisie;
 
     useEffect(() => {
-        axios.get('http://localhost:3001/user', {params: {"prenom" : "Louis"}}).then(res => {
+        axios.get('http://localhost:3001/user', {params: {"id" : document.cookie}}).then(res => {
             for (let i = 0; i < res.data.objectifs.length; i++){
                 nouveauxObjectifs.push(res.data.objectifs[i])
             }
         })});
 
     function ajouterObjectifs(params) {
-        console.log(params)
+        //console.log(params)
         if (nouveauxObjectifs.indexOf(params.objectif) < 0) {
             nouveauxObjectifs.push(params.objectif);
         } else {
             alert("L'objectif choisi a déjà été ajouté !")
             return
         }
-        query_choisie = {Prenom : "Louis", objectifs : nouveauxObjectifs}
-        console.log(query_choisie)
+        query_choisie = {"id" : document.cookie, objectifs : nouveauxObjectifs}
+        console.log( query_choisie)
         axios.post("http://localhost:3001/user/objectif", query_choisie).then(alert("Objectif ajouté avec succès !"))
         window.location.reload(false);
     };
