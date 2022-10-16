@@ -29,17 +29,6 @@ body{
     text-align: center;
 }
 
-.navigation {
-    background-color: green;
-}
-
-.page_index {
-    background-color: blue;
-}
-
-.button_new_obj {
-    background-color: yellow;
-}
 body{
     background-color: #3d3939;
     background-image: url("../images/logoNewMe.png");
