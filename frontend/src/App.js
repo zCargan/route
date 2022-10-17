@@ -1,16 +1,25 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import About from './pages/About';
 import Objectifs from './pages/Objectifs';
 import Page_compte from './pages/Page_compte';
 import Navbar from './components/navbar';
 import Default from './pages/default';
+import Profil from './pages/Profil';
+import Carte from './pages/Carte';
+import Rgpd from './pages/Rgpd'
 
 import './styles/App.css'
 import ProfilUsers from './pages/ProfilUser';
 import NouvelObjectif from './components/NouvelObjectif';
 
 const App = () => {
+  let connecte = false
+
+  if (document.cookie !== "") {
+    connecte = true
+  }
+
   return (
     <div className="page">
       <BrowserRouter>
