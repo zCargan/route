@@ -1,7 +1,7 @@
 .objectifs {
     background-color: #d9d9d9;
     color: black;
-    border-radius: 5px;
+    border-radius: 10px;
     border: black 1px solid;
     font-size: 40px;
     margin: 10px;
@@ -19,16 +19,59 @@ ul{
     transition: all 0.3s ease-out;
     border-radius: 110%;
     position: absolute;
-    bottom:0;
+    bottom:0.5%;
     right: 0.5%;
 }
 
 .fa-circle-plus:hover{
     color: #d9d9d9;
     background-color: #3d3939;
+    cursor: pointer;
 }
 
 p{
     margin: 0;
     padding-right: 40px;
+}
+
+.fa-circle-xmark {
+    font-size: 2rem;
+    color: #3d3939;
+    background-color: #d9d9d9;
+    transition: all 0.3s ease-out;
+    border-radius: 110%;
+    position: absolute;
+    bottom:0.5%;
+    right: 0.5%;
+}
+
+.fa-circle-xmark:hover{
+    color: #d9d9d9;
+    background-color: #3d3939;
+    cursor: pointer;
+}
+
+.searchedObjectifsButton{
+    color:#d9d9d9;
+    width: 25%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.searchedObjectifs{
+    width:25%;
+    height: 100%;
+    float: right;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.username, .email{
+    padding-right: 0;
 }

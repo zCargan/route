@@ -7,7 +7,44 @@ function Navbar() {
     const [click, setClick] = useState(false);
 
     const handleClick = () => setClick(!click);
-
+    if (document.cookie==''){
+        return (
+            <nav className={click ? 'navbar-active' : 'navbar'}>
+                <div className='navbar-container'>
+                    <div className="menu-list">
+                        <div className="menu-icon" onClick={handleClick}>
+                            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+                        </div>
+                        <NavLink to="/" className="navbar-logo">
+                            <img src={logo} alt="NewMeLogo" />
+                        </NavLink>
+                    </div>
+                    <ul className="nav-list">
+                        <li className='nav-item'>
+                            <NavLink to='/home' className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
+                                Home
+                            </NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink to="/carte" className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
+                                Carte
+                            </NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink to="/adefinir" className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
+                                ?
+                            </NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink to="/inscription" className={(state) => state.isActive ? 'nav-links-mobile-active' : 'nav-links-mobile'}>
+                                Sign Up
+                            </NavLink>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        )
+    }
     return (
         <nav className={click ? 'navbar-active' : 'navbar'}>
             <div className='navbar-container'>
@@ -45,15 +82,16 @@ function Navbar() {
                             Profil
                         </NavLink>
                     </li>
-                    <li className='nav-item'>
+                    {/* <li className='nav-item'>
                         <NavLink to="/inscription" className={(state) => state.isActive ? 'nav-links-mobile-active' : 'nav-links-mobile'}>
                             Sign Up
                         </NavLink>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         </nav>
     )
+    
 }
 
 export default Navbar

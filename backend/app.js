@@ -116,7 +116,7 @@ app.post('/user', (req, res) => {
                 maxAge: 500000,
                 // expires works the same as the maxAge
                 secure: false, // mettre l'attribut à true une fois que le site est en HTTPS
-                //httpOnly: true,
+                // httpOnly: true,
                 sameSite: 'lax'
             });
             return res.status(200).json(response);
@@ -146,7 +146,8 @@ app.put('/api/stuff/:id', (req, res, next) => {
 app.get('/getcookie', (req, res) => {
     //show the saved cookies
     console.log(req.cookies)
-    return res.status(200).json(req.cookies);});
+    return res.status(200).json(req.cookies);
+});
 
 /*app.get('/setcookie', (req, res) => {
     res.cookie(`Cookie token name`,`encrypted cookie string Value`,{
@@ -159,10 +160,10 @@ app.get('/getcookie', (req, res) => {
     });
     res.send('Cookie have been saved successfully');
 });
-
+*/
 app.get('/deletecookie', (req, res) => {
     //show the saved cookies
-    res.clearCookie()
-    res.send('Cookie has been deleted successfully');
-});*/
+    res.clearCookie('Id')
+    return res.status(200).json(req.cookies);
+});
 module.exports = app //export la constante pour que l'on puisse l'utiliser partout

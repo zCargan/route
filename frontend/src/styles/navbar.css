@@ -17,11 +17,13 @@
 .fa-bars:hover{
     transition: all 0.3s ease-out;
     color: #d9d9d9;
+    cursor: pointer;
 }
 
 .fa-times:hover{
     transition: all 0.3s ease-out;
     color: #d9d9d9;
+    cursor: pointer;
 }
 
 .active {
