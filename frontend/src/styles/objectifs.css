@@ -51,6 +51,11 @@ p{
     cursor: pointer;
 }
 
+
+.username, .email{
+    padding-right: 0;
+}
+
 .searchedObjectifsButton{
     color:#d9d9d9;
     width: 25%;
@@ -60,7 +65,6 @@ p{
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
 }
 
 .searchedObjectifs{
@@ -72,6 +76,11 @@ p{
     border: none;
 }
 
-.username, .email{
-    padding-right: 0;
+.search-bar{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 3%;
+    text-align: center;
+    align-items: center;
 }

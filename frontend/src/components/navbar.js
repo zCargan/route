@@ -26,11 +26,6 @@ function Navbar() {
                             </NavLink>
                         </li>
                         <li className='nav-item'>
-                            <NavLink to="/carte" className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
-                                Carte
-                            </NavLink>
-                        </li>
-                        <li className='nav-item'>
                             <NavLink to="/adefinir" className={(state) => state.isActive ? 'nav-links-active' : 'nav-links'}>
                                 ?
                             </NavLink>

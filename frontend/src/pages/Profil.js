@@ -52,11 +52,14 @@ function Profil() {
         <>
         <div className='profil'>
         <h2>Mon profil :</h2>
-            <p className="username">Pseudonyme : {username}</p>
-            <p className="email">Adresse email : {email}</p>
+            <i className="fa-solid fa-circle-user"></i>
+            <div className='text'>
+                <p className="username">Pseudonyme : {username}</p>
+                <p className="email">Adresse email : {email}</p>
+            </div>
             <PopupProfil />
         </div>
-        <h2>Mes objectifs</h2>
+        <h2 className='objectifs-profil'>Mes objectifs</h2>
             <ul>
                 {data.map((objectif) =>
                     <li key={objectif} className="objectifs"> <p className="titre-objectifs">{objectif}</p><i className="fa-solid fa-circle-xmark"></i></li>
