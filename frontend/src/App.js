@@ -6,6 +6,7 @@ import Page_compte from './pages/Page_compte';
 import Navbar from './components/navbar';
 import Default from './pages/default';
 import Profil from './pages/Profil';
+import Carte from './pages/Carte';
 
 import './styles/App.css'
 
@@ -26,6 +27,7 @@ const App = () => {
             <Route path="*" element={<Default />} />
             <Route path="/profil" element={<Profil />} />
             <Route path="/inscription" element={<Page_compte />}/>
+            <Route path="/carte" element={<Carte />} />
           </Routes>
           </div>
       </BrowserRouter>

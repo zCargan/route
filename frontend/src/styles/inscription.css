@@ -1,4 +1,4 @@
-#inscription{
+.inscription{
     margin: 3%;
     padding: 3%;
     background-color: #a09f9f;
@@ -27,7 +27,7 @@
     color: #d9d9d9;
 }
 
-.text_zone_button{
+.button_submit{
     border-radius: 10px;
     margin: 5px;
     width: 95%;
@@ -35,10 +35,12 @@
     transition: all 0.3s ease-out; 
     text-align: center;
     color: #d9d9d9;
+    border: none;
 }
-.text_zone_button:hover{
+.button_submit:hover{
     background-color: #d9d9d9;
     color:#980012;
     transition: all 0.3s ease-out; 
     cursor: pointer;
+    border: none;
 }
