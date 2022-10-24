@@ -1,4 +1,5 @@
 import React from 'react';
+import BarreRecherche from '../components/BarreDeRecherche';
 
 
 
@@ -6,7 +7,7 @@ import React from 'react';
 const Default = () => {
     return (
         <div>
-
+            <BarreRecherche/>
         </div>
     );
 };

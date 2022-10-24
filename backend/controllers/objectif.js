@@ -1,14 +1,14 @@
-const User = require("../models/user");
+const Objectif = require('../models/objectif')
 
 
-exports.createUser = (req, res, next) => {
-    const user = new User({
+exports.createObjectif = (req, res, next) => {
+    const obj = new Objectif({
       ...req.body
     });
-    user.save().then(
+    obj.save().then(
       () => {
         res.status(201).json({
-          message: 'Post saved successfully!'
+          message: 'Objectif saved successfully!'
         });
       }
     ).catch(
@@ -20,12 +20,12 @@ exports.createUser = (req, res, next) => {
     );
   };
 
-exports.getOneUser = (req, res, next) => {
-    User.findOne({
+exports.getOneObjectif = (req, res, next) => {
+    Objectif.findOne({
       _id: req.params.id
     }).then(
-      (thing) => {
-        res.status(200).json(thing);
+      (obj) => {
+        res.status(200).json(obj);
       }
     ).catch(
       (error) => {
@@ -36,21 +36,17 @@ exports.getOneUser = (req, res, next) => {
     );
   };
   
-exports.modifyUser = (req, res, next) => {
-    const user = new User({
+exports.modifyObjectif = (req, res, next) => {
+    const obj = new Objectif({
       _id: req.params.id,
-      nom : req.body.nom,
-      prenom : req.body.prenom,
-      pseudonyme : req.body.pseudonyme,
-      age : req.body.age,
-      email : req.body.email,
-      password : req.body.password,
-      objectifs : req.body.objectifs,
+      type: req.body.type,
+      objectif: req.body.objectif,
+      description: req.body.description,
     });
-    User.updateOne({_id: req.params.id}, user).then(
+    Objectif.updateOne({_id: req.params.id}, obj).then(
       () => {
         res.status(201).json({
-          message: 'User updated successfully!'
+          message: 'Objectif updated successfully!'
         });
       }
     ).catch(
@@ -62,8 +58,8 @@ exports.modifyUser = (req, res, next) => {
     );
   };
   
-exports.deleteUser = (req, res, next) => {
-    User.deleteOne({_id: req.params.id}).then(
+exports.deleteObjectif = (req, res, next) => {
+    Objectif.deleteOne({_id: req.params.id}).then(
       () => {
         res.status(200).json({
           message: 'Deleted!'
@@ -78,10 +74,10 @@ exports.deleteUser = (req, res, next) => {
     );
   };
   
-exports.getAllUser = (req, res, next) => {
-    User.find().then(
-      (users) => {
-        res.status(200).json(users);
+exports.getAllObjectif = (req, res, next) => {
+    Objectif.find().then(
+      (objs) => {
+        res.status(200).json(objs);
       }
     ).catch(
       (error) => {

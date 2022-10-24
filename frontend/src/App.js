@@ -6,6 +6,7 @@ import Page_compte from './pages/Page_compte';
 import Navbar from './components/navbar';
 import Default from './pages/default';
 import './styles/App.css'
+import Profil from './pages/ProfilUser';
 
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
             {/* page par défault  */}
             <Route path="*" element={<Default />} />
             <Route path="/inscription" element={<Page_compte />}/>
+            <Route path='/profil' element={<Profil />}/>
           </Routes>
           </div>
       </BrowserRouter>
