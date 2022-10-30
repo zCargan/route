@@ -47,7 +47,7 @@ const Connection = () => {
                             <input type="password" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
                         </div>
                         <div className="text_zone_button" onClick={login_verfif}>
-                                Connection
+                                Connexion
                         </div>
                         <div className="text_zone_button">
                                 Mot de passe oublié ?
