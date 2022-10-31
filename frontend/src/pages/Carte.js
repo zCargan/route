@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { layer, Map, Layers } from "react-openlayers"
 import "../styles/map.css"
+import Localisation from '../components/Localisation';
 
 
 const Carte = () => {
@@ -9,6 +10,7 @@ const Carte = () => {
     const LouvainLaNeuveZoom = 15;
     const [position0, setPosition0] = useState([0, 0]);
     const [zoom0, setZoom0] = useState(1);
+    const location = Localisation;
 
     function LouvainLaNeuve() {
         setPosition0(LouvainLaNeuveLonLat)
