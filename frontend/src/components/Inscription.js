@@ -3,7 +3,7 @@ import axios from 'axios';
 import "../styles/inscription.css"
 import "../styles/App.css"
 import emailjs from 'emailjs-com';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Inscription = () => {
 
@@ -20,8 +20,8 @@ const Inscription = () => {
 
     const navigateToHome = () => {
         navigate('/home');
-      };
-    
+    };
+
     const variables = async (e) => {
         e.preventDefault();
         const infos = {
@@ -29,6 +29,15 @@ const Inscription = () => {
             email,
             password,
             samePassword
+        }
+
+        const données_envoyées = {
+            "username": username,
+            "email": email,
+            "password": password,
+            "confirmed": false,
+            "objectifs": [],
+            "city": ""
         }
 
         //variable nécessaire afin d'effectuer à la requete à la db afin de savoir si l'email est déja utilisé ou non
@@ -59,7 +68,7 @@ const Inscription = () => {
                                                 alert("Mot de passe trop court")
                                             } else {
                                                 axios
-                                                    .post("http://localhost:3001/inscription", infos)
+                                                    .post("http://localhost:3001/inscription", données_envoyées)
                                                     .then(response => {
                                                         if (response.status === 201) {
                                                             emailjs.sendForm('service_wco0ss6', 'template_f9ar9zo', e.target, 'uX_z-9_6PbAb24o0e')

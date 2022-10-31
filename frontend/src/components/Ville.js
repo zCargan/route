@@ -6,6 +6,7 @@ const Ville = () => {
 
     const [nouvelle_ville, setNouvelleVille] = useState("");
     const [villes, setVilles] = useState([]);
+    const [villeUser, setVilleUser] = useState("");
 
 
 
@@ -19,12 +20,6 @@ const Ville = () => {
         });
     }, [])
 
-
-
-
-    const save_ville = async (e) => {
-
-    }
 
 
     const variables = async (e) => {
@@ -41,17 +36,17 @@ const Ville = () => {
 
     return (
         <div>
-            <select name="">
+            <select>
                 <option value="">Veuillez séléctionnez votre ville</option>
                 {villes.map((ville) => (
                     <option>{ville}</option>
                 ))}
             </select>
-            <button onClick={save_ville}>Valider ma ville</button>
+            <button onChange={(e) => setVilleUser(e.target.value)}>Valider ma ville</button>
             <div>
                 <label>Ville absente?</label>
                 <input type="text" placeholder="Nom de la ville" onChange={(e) => setNouvelleVille(e.target.value)} />
-                <button onClick={variables}>Ajouter</button>
+                <button onClick={variables} >Ajouter</button>
             </div>
         </div>
     );
