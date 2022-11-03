@@ -92,6 +92,28 @@ app.post('/email', (req, res) => {
         })
 })
 
+
+// ============================================================================== MAJ PROFIL ==============================================================================
+
+app.post('/update_profil', (req, res) => {
+    let email = req.body.email;
+    console.log(req.body)
+    User.updateOne({ "email": email }, { $set: req.body })
+        .then(() => res.status(201).json({ message: 'Utilisateur modifié !' }))
+        .catch(error => res.status(400).json({ error }));
+})
+
+
+
+
+
+
+
+
+
+
+
+
 app.post('/inscription', (req, res) => {
     console.log(req.body)
     const test = new User({

@@ -13,7 +13,7 @@ const PopupProfil = () => (
             <input type="text" className="email" />
             <br />
             <Ville />
-            <button>Valider</button>
+
         </form>
     </Popup>
 )
