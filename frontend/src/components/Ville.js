@@ -45,11 +45,15 @@ const Ville = () => {
     }, [])
 
     const validation = async (e) => {
-
-        console.log(donnees_a_jour)
         axios
             .post("http://localhost:3001/update_profil", donnees_a_jour)
-            .then(response => console.log(response))
+            .then(response => {
+                if (response.status == 201) {
+                    alert("Profil modifié")
+                } else {
+                    alert("Une erreur à eu lieu lors de la modification du profil")
+                }
+            })
     }
 
 
@@ -84,7 +88,7 @@ const Ville = () => {
             <select value={city} onChange={e => setCity(e.target.value)}>
                 <option>Veuillez séléctionnez votre ville</option>
                 {villes.map((ville) => (
-                    <option>{ville}</option>
+                    <option key={ville._id}>{ville}</option>
                 ))}
             </select>
             <br />

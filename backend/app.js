@@ -103,9 +103,16 @@ app.post('/update_profil', (req, res) => {
         .catch(error => res.status(400).json({ error }));
 })
 
+// ============================================================================== RECHERCHE USER ==============================================================================
 
-
-
+app.post('/find', (req, res) => {
+    let ville = req.body.city;
+    console.log(ville)
+    User.find({ "city": ville }).then(response => {
+        res.status(200).json(response)
+        console.log(response)
+    })
+});
 
 
 
