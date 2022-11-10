@@ -1,6 +1,7 @@
 const User = require("../models/user");
 
 
+
 exports.createUser = (req, res, next) => {
     const user = new User({
       ...req.body
@@ -91,3 +92,54 @@ exports.getAllUser = (req, res, next) => {
       }
     );
   };
+
+  exports.getOneMail = (req, res, next) => {
+    User.findOne({ email : req.body.email})
+    .then(response => {
+      if(!response){
+        return res.send("Ok")
+
+      }
+      else {
+        return res.send('Not ok')
+      };
+    });
+  };
+
+  exports.getOneUsername = (req, res, next) => {
+    User.findOne({ username: req.body.username })
+    .then(response => {
+      if(!response){
+        return res.send("ok")
+      }
+      else {
+        return res.send("not ok")
+      }
+    })
+  }
+
+  exports.login = (req, res ,next) => {
+    User.findOne({ email: req.body.email})
+    .then(response => {
+        if(!response){
+          console.log("Utilisateur non trouvé !")
+          return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+        }
+        if (req.body.mdp == response.password) {
+          res.cookie('Id', response._id.toString(), {
+              maxAge: 500000,
+              // expires works the same as the maxAge
+              secure: false, // mettre l'attribut à true une fois que le site est en HTTPS
+              // httpOnly: true,
+              sameSite: 'lax'
+          });
+          console.log('Cookie :' + req.signedCookie)
+          return res.status(200).json(response);
+      }
+        else{
+          console.log("Mot de passe incorrecte")
+          return res.status(401).json({ error: 'Mot de passe incorrecte !' });
+      }
+
+    })
+  }

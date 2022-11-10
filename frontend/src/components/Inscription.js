@@ -32,13 +32,13 @@ const Inscription = () => {
         }
 
 
-        axios.post("http://localhost:3001/username", infos)
+        axios.post("http://localhost:3001/user/username", infos)
             .then(response => {
                 if (response.data === "not ok") {
                     alert("Username already used");
                 } else {
                     if (checkEmail(email)) {
-                        axios.post("http://localhost:3001/email", infos)
+                        axios.post("http://localhost:3001/user/email", infos)
                             .then(response => {
                                 if (response.data === "not ok") {
                                     alert("Email already used")
@@ -48,7 +48,7 @@ const Inscription = () => {
                                             alert("Mot de passe trop court")
                                         } else {
                                             axios
-                                                .post("http://localhost:3001/inscription", infos)
+                                                .post("http://localhost:3001/user/inscription", infos)
                                                 .then(response => {
                                                     if (response.status === 201) {
                                                         alert("Compte créer !");

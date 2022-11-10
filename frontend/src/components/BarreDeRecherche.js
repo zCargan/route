@@ -14,16 +14,18 @@ function BarreRecherche(){
 
     const navigate = useNavigate();
 
-    useEffect(() =>{
+    const eEffect = () => {
         axios.get('http://localhost:3001/user')
         .then(res => {
             setUser(res.data)
 
         })
-    });
+    };
 
     const handleFilter = (event) => {
         const searchWord = event.target.value
+
+        eEffect();
         const newFilter = user.filter((value) => {
             return value.username.toLowerCase().includes(searchWord.toLowerCase());
         });

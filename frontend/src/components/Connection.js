@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import "../styles/connection.css"
 import "../styles/App.css"
 
@@ -8,46 +9,51 @@ const Connection = () => {
 
     const [email, setEmail] = useState(null)
     const [mdp, setMdp] = useState(null)
+    const navigate = useNavigate();
 
-    const test = async (e) => {
+    const navigateToHome = () => {
+        // 👇️ navigate to /contacts
+        navigate('/');
+      };
+
+    const login_verfif = async (e) => {
         e.preventDefault();
         let values = {
             email :email,
             mdp :mdp
         };
-        axios
-            .post("http://localhost:3001/user", values)
+        axios.post("http://localhost:3001/user/login", values /*,{ withCredentials: true }*/)
             .then(response => {
-                console.log({ response })
+                alert("Vous êtes connecté")
+                navigateToHome()
+                window.location.reload(false)
             });
-        console.log( values )
     }
-
 
 
     return (
 
-                <div id="connection">
-                    <h2>Se connecter</h2>
-                    <form className='form_connection'>
-                        <div className="text_zone">
-                            <i class="fa-sharp fa-solid fa-envelope"></i>
-                            <input type="string" placeholder='Email du compte' onChange={(e) => setEmail(e.target.value)} />
-                        </div>
-                        <div className="text_zone">
-                            <i class="fa-sharp fa-solid fa-lock"></i>
-                            <input type="string" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
-                        </div>
-                        <div className="text_zone_button" onClick={test}>
-                                Connection
-                        </div>
-                        <div className="text_zone_button">
-                                Mot de passe oublié ?
-                        </div>
-                    </form>
+        <div id="connection">
+            <h2>Se connecter</h2>
+            <form className='form_connection'>
+                <div className="text_zone">
+                    <i className="fa-sharp fa-solid fa-envelope"></i>
+                    <input type="string" placeholder='Email du compte' onChange={(e) => setEmail(e.target.value)} />
                 </div>
+                <div className="text_zone">
+                    <i className="fa-sharp fa-solid fa-lock"></i>
+                    <input type="password" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
+                </div>
+                <div className="text_zone_button" onClick={login_verfif}>
+                        Connexion
+                </div>
+                <div className="text_zone_button">
+                        Mot de passe oublié ?
+                </div>
+            </form>
+        </div>
 
-    );
+);
 };
 
 export default Connection;
