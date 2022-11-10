@@ -1,12 +1,15 @@
-import React from 'react';
-
-
+import React from 'react'
 
 
 const Default = () => {
-    return (
-        <div>
 
+    return (
+        <div className='div_global'>
+            <div>
+                <p className='bienvenue_text'>
+                    Bienvenue sur la page d'accueil du site
+                </p>
+            </div>
         </div>
     );
 };

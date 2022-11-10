@@ -2,25 +2,33 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "../styles/connection.css"
 import "../styles/App.css"
+import {useNavigate} from 'react-router-dom';
+//import { response } from '../../../backend/app';
 
 const Connection = () => {
 
 
     const [email, setEmail] = useState(null)
     const [mdp, setMdp] = useState(null)
+    const navigate = useNavigate();
 
-    const test = async (e) => {
+    const navigateToHome = () => {
+        // 👇️ navigate to /contacts
+        navigate('/home');
+      };
+
+    const login_verfif = async (e) => {
         e.preventDefault();
         let values = {
             email :email,
             mdp :mdp
         };
-        axios
-            .post("http://localhost:3001/user", values)
+        axios.post("http://localhost:3001/user", values, { withCredentials: true })
             .then(response => {
-                console.log({ response })
+                alert("Vous êtes connecté")
+                navigateToHome()
+                window.location.reload(false)
             });
-        console.log( values )
     }
 
 
@@ -31,15 +39,15 @@ const Connection = () => {
                     <h2>Se connecter</h2>
                     <form className='form_connection'>
                         <div className="text_zone">
-                            <i class="fa-sharp fa-solid fa-envelope"></i>
+                            <i className="fa-sharp fa-solid fa-envelope"></i>
                             <input type="string" placeholder='Email du compte' onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="text_zone">
-                            <i class="fa-sharp fa-solid fa-lock"></i>
-                            <input type="string" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
+                            <i className="fa-sharp fa-solid fa-lock"></i>
+                            <input type="password" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
                         </div>
-                        <div className="text_zone_button" onClick={test}>
-                                Connection
+                        <div className="text_zone_button" onClick={login_verfif}>
+                                Connexion
                         </div>
                         <div className="text_zone_button">
                                 Mot de passe oublié ?
