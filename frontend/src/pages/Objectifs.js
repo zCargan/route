@@ -20,6 +20,7 @@ function Objectifs() {
 
     function ajouterObjectifs(params) {
         //console.log(params)
+        console.log(params.objectif)
         if (nouveauxObjectifs.indexOf(params.objectif) < 0) {
             nouveauxObjectifs.push(params.objectif);
         } else {

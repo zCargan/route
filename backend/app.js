@@ -113,7 +113,7 @@ app.post('/user', (req, res) => {
       }
         if (req.body.mdp == response.password){
             res.cookie('Id', response._id.toString() ,{
-                maxAge: 500000,
+                maxAge: 5000000,
                 // expires works the same as the maxAge
                 secure: false, // mettre l'attribut à true une fois que le site est en HTTPS
                 // httpOnly: true,
@@ -166,4 +166,13 @@ app.get('/deletecookie', (req, res) => {
     res.clearCookie('Id')
     return res.status(200).json(req.cookies);
 });
+
+app.post('/updateUser', (req, res) => {
+    let id_value = req.body.id.split("=")[1];
+    let id_json = {"_id":ObjectId(id_value)}
+    let modif_json = {[Object.keys(req.body)[1]]:req.body.username, [Object.keys(req.body)[2]]:req.body.email}
+   User.updateOne(id_json, {$set:modif_json})
+    .then(() => res.status(201).json({ message: 'Utilisateur modifié !' }))
+    .catch(error => res.status(400).json({ error }));
+ });
 module.exports = app //export la constante pour que l'on puisse l'utiliser partout
