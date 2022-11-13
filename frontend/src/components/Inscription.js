@@ -4,6 +4,7 @@ import "../styles/inscription.css"
 import "../styles/App.css"
 import emailjs from 'emailjs-com';
 import { useNavigate } from 'react-router-dom';
+import bcrypt from 'bcryptjs'
 
 const Inscription = () => {
 
@@ -37,10 +38,13 @@ const Inscription = () => {
             samePassword
         }
 
+
+        const hashedPassword = bcrypt.hashSync(password, 10);
+
         const données_envoyées = {
             "username": username,
             "email": email,
-            "password": password,
+            "password": hashedPassword,
             "confirmed": false,
             "objectifs": [],
             "city": ""
@@ -48,6 +52,13 @@ const Inscription = () => {
 
         //variable nécessaire afin d'effectuer à la requete à la db afin de savoir si l'email est déja utilisé ou non
 
+        function notXSSInjection(string) {
+            return !(string.includes("<"))
+        }
+
+        function notToLongString(string) {
+            return (string.length < 30)
+        }
 
         function checkEmail(email) {
             var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -58,48 +69,59 @@ const Inscription = () => {
         if ((username === "") || (email === "") || (password === "") || (samePassword === "")) {
             alert("Veuillez compléter tous les champs");
         } else {
-            axios.post("http://localhost:3001/user/username", infos)
-                .then(response => {
-                    if (response.data === false) {
-                        alert("Username already used");
-                    } else {
-                        if (checkEmail(email)) {
-                            axios.post("http://localhost:3001/user/email", infos)
-                                .then(response => {
-                                    if (response.data === false) {
-                                        alert("Email already used")
-                                    } else {
-                                        if (password === samePassword) {
-                                            if (Number(password.length) < 12) {
-                                                alert("Mot de passe trop court")
-                                            } else {
-                                                axios
-                                                    .post("http://localhost:3001/user/inscription", données_envoyées)
-                                                    .then(response => {
-                                                        if (response.status === 201) {
-                                                            emailjs.sendForm('service_wco0ss6', 'template_f9ar9zo', e.target, 'uX_z-9_6PbAb24o0e')
-                                                                .then((result) => {
-                                                                    console.log(result.text);
-                                                                }, (error) => {
-                                                                    console.log(error.text);
+            if (notToLongString(username) && notToLongString(email) && notToLongString(password) && notToLongString(samePassword)) {
+                if (notXSSInjection(username) && notXSSInjection(email) && notXSSInjection(password) && notXSSInjection(samePassword)) {
+                    if (passwordHasValidLength && passwordHasLowercaseLetter && passwordHasUppercaseLetter && passwordHasSpecialCharacter && passwordHasNumber) {
+                        axios.post("http://localhost:3001/username", infos)
+                            .then(response => {
+                                if (response.data === "not ok") {
+                                    alert("Username already used");
+                                } else {
+                                    if (checkEmail(email)) {
+                                        axios.post("http://localhost:3001/email", infos)
+                                            .then(response => {
+                                                if (response.data === "not ok") {
+                                                    alert("Email already used")
+                                                } else {
+                                                    if (password === samePassword) {
+                                                        if (Number(password.length) < 12) {
+                                                            alert("Mot de passe trop court")
+                                                        } else {
+                                                            axios
+                                                                .post("http://localhost:3001/inscription", données_envoyées)
+                                                                .then(response => {
+                                                                    if (response.status === 201) {
+                                                                        emailjs.sendForm('service_wco0ss6', 'template_f9ar9zo', e.target, 'uX_z-9_6PbAb24o0e')
+                                                                            .then((result) => {
+                                                                                console.log(result.text);
+                                                                            }, (error) => {
+                                                                                console.log(error.text);
+                                                                            });
+                                                                        e.target.reset()
+                                                                        alert("Compte créer ! Un email de confirmation vous a été envoyé")
+                                                                        navigateToHome()
+                                                                    }
                                                                 });
-                                                            e.target.reset()
-                                                            alert("Compte créer ! Un email de confirmation vous a été envoyé")
-                                                            navigateToHome()
                                                         }
-                                                    });
-                                            }
-                                        } else {
-                                            alert("Vos deux mots de passe ne correspondent pas")
-                                        }
+                                                    } else {
+                                                        alert("Vos deux mots de passe ne correspondent pas")
+                                                    }
+                                                }
+                                            })
+                                    } else {
+                                        alert("Votre adresse email n'est pas valide")
                                     }
-                                })
-                        } else {
-                            alert("Votre adresse email n'est pas valide")
-                        }
+                                }
+                            });
+                    } else {
+                        alert("Votre mot de passe ne respecte pas tous les critères")
                     }
-                });
-
+                } else {
+                    alert("Pas de < autorisé dans vos informations")
+                }
+            } else {
+                alert("Les informations que vous rentrer sont trop longue")
+            }
         }
     }
     return (
@@ -116,18 +138,18 @@ const Inscription = () => {
                 </div>
                 <div className="text_zone">
                     <i className="fa-sharp fa-solid fa-lock"></i>
-                    <input type="password" placeholder='Mot de passe' onChange={(e) => setPassword(e.target.value)} /> 
+                    <input type="password" placeholder='Mot de passe' onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className='text_zone'>
-                <label style={{color: passwordHasValidLength ? 'green' : 'red'}}>Mot de passe de 12 caractères </label>
+                    <label style={{ color: passwordHasValidLength ? 'green' : 'red' }}>Mot de passe de 12 caractères </label>
                     <br />
-                    <label style={{color: passwordHasLowercaseLetter? 'green' : 'red'}}>Min 1 caractère minuscule</label>
+                    <label style={{ color: passwordHasLowercaseLetter ? 'green' : 'red' }}>Min 1 caractère minuscule</label>
                     <br />
-                    <label style={{color: passwordHasUppercaseLetter? 'green' : 'red'}}>Min 1 caractère majuscule</label>
+                    <label style={{ color: passwordHasUppercaseLetter ? 'green' : 'red' }}>Min 1 caractère majuscule</label>
                     <br />
-                    <label style={{color: passwordHasNumber? 'green' : 'red'}}>Min 1 nombre</label>
+                    <label style={{ color: passwordHasNumber ? 'green' : 'red' }}>Min 1 nombre</label>
                     <br />
-                    <label style={{color: passwordHasSpecialCharacter? 'green' : 'red'}}>Min 1 caractère spécial</label>
+                    <label style={{ color: passwordHasSpecialCharacter ? 'green' : 'red' }}>Min 1 caractère spécial</label>
                 </div>
                 <div className="text_zone">
                     <i className="fa-sharp fa-solid fa-lock"></i>
@@ -136,9 +158,6 @@ const Inscription = () => {
                 <div>
                     <input type="submit" className="button_submit" value="Valider" />
                 </div>
-                {/* <div className="text_zone_button" onClick={variables}>
-                S'inscrire
-                </div> */}
             </form>
         </div>
     );
