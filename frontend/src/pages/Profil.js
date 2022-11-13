@@ -63,16 +63,16 @@ function Profil() {
                     <p className="username">Pseudonyme : {username}</p>
                     <p className="email">Adresse email : {email}</p>
                 </div>
-                <PopupProfil />
-            </div>
+            
             <Popup trigger={<button className="modifierProfil"> Modifier profil</button>} position="center">
             {close => (
                 <div>
-                <ModifierProfil/>
+                <ModifierProfil/>              
                 <button onClick={() => {close(); }} className="button_submit">Annuler</button>
                 </div>
                 )}
             </Popup>
+            </div>
         <h2 className='objectifs-profil'>Mes objectifs</h2>
             <ul>
                 {data.map((objectif) =>
