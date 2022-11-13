@@ -19,7 +19,7 @@ function Profil() {
 
     const navigateToHome = () => {
         navigate('/home');
-      };
+    };
 
     function supprimerObjectifs(objectifToDelete) {
         let arrayObjectif=data;
@@ -34,8 +34,8 @@ function Profil() {
         window.location.reload(false);
     };
     useEffect(() => {
-        axios.get('http://localhost:3001/user', {params: {"id" : document.cookie}}).then(res => {
-            for (let i = 0; i < res.data; i++){
+        axios.get('http://localhost:3001/user', { params: { "id": document.cookie } }).then(res => {
+            for (let i = 0; i < res.data; i++) {
                 nouveauxObjectifs.push(res.data.objectifs[i])
             }
             setData(res.data.objectifs)
@@ -45,22 +45,25 @@ function Profil() {
         })}, []);
     function deconnexion(){
         axios.get('http://localhost:3001/deletecookie', { withCredentials: true })
-        .then( res => {      
-            document.cookie = ""
-            console.log(document.cookie)
-            navigateToHome()
-        window.location.reload(false)}
-        )
+            .then(res => {
+                document.cookie = ""
+                console.log(document.cookie)
+                navigateToHome()
+                window.location.reload(false)
+            }
+            )
     }
 
     return (
         <>
-        <div className='profil'>
-        <h2>Mon profil :</h2>
-            <i className="fa-solid fa-circle-user"></i>
-            <div className='text'>
-                <p className="username">Pseudonyme : {username}</p>
-                <p className="email">Adresse email : {email}</p>
+            <div className='profil'>
+                <h2>Mon profil :</h2>
+                <i className="fa-solid fa-circle-user"></i>
+                <div className='text'>
+                    <p className="username">Pseudonyme : {username}</p>
+                    <p className="email">Adresse email : {email}</p>
+                </div>
+                <PopupProfil />
             </div>
             <Popup trigger={<button className="modifierProfil"> Modifier profil</button>} position="center">
             {close => (
@@ -70,7 +73,6 @@ function Profil() {
                 </div>
                 )}
             </Popup>
-        </div>
         <h2 className='objectifs-profil'>Mes objectifs</h2>
             <ul>
                 {data.map((objectif) =>
@@ -78,7 +80,7 @@ function Profil() {
                 )}
             </ul>
             <p className="deconnexion" onClick={deconnexion}>
-                    Déconnexion
+                Déconnexion
             </p>
         </>
     );
