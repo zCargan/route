@@ -1,24 +1,22 @@
 import '../styles/App.css'
 import '../styles/objectifs.css'
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
-export function ajouterObjectifs(params) {
-    //let nouveauxObjectifs = ["Apprendre l'anglais"];
-    let nouveauxObjectifs = [];
-    let query_choisie;
-    if(params=="") {
+// Pour effectuer les tests, il faut mettre en commentaire les lignes 1,2 et 4!
+
+export function testajouterObjectifs(params) {
+    let nouveauxObjectifs = ["Apprendre l'anglais"];
+    if (params === "") {
         return "Veuillez entrer un objectif !"
     }
     else if (nouveauxObjectifs.indexOf(params.objectif) < 0) {
         nouveauxObjectifs.push(params.objectif);
-        query_choisie = {"id" : document.cookie, objectifs : nouveauxObjectifs}
-        axios.post("http://localhost:3001/user/objectif", query_choisie).then(alert("Objectif ajouté avec succès !"))
-        window.location.reload(false);
-        return nouveauxObjectifs;
+        return nouveauxObjectifs
     } else {
-        return "L'objectif a déjà été ajouté"
-    }}
+        return "L'objectif choisi a déjà été ajouté !"
+    }
+}
 
 function Objectifs() {
     const [data, setData] = useState([]);
@@ -26,6 +24,7 @@ function Objectifs() {
     const [searchedObjectifs, setSearchedObjectifs] = useState("")
 
     let nouveauxObjectifs = [];
+    let query_choisie;
 
     useEffect(() => {
         axios.get('http://localhost:3001/user', {params: {"id" : document.cookie}}).then(res => {
@@ -34,20 +33,21 @@ function Objectifs() {
             }
         })});
 
-    // function ajouterObjectifs(params) {
-    //     if(params=="") {
-    //         return "Veuillez entrer un objectif !"
-    //     }
-    //     else if(nouveauxObjectifs.indexOf(params.objectif) < 0) {
-    //         nouveauxObjectifs.push(params.objectif);
-    //     } else {
-    //         alert("L'objectif choisi a déjà été ajouté !")
-    //         return
-    //     }
-    //     query_choisie = {"id" : document.cookie, objectifs : nouveauxObjectifs}
-    //     axios.post("http://localhost:3001/user/objectif", query_choisie).then(alert("Objectif ajouté avec succès !"))
-    //     window.location.reload(false);
-    // };
+    function ajouterObjectifs(params) {
+        if (params === "") {
+            return "Veuillez entrer un objectif !"
+        }
+        else if (nouveauxObjectifs.indexOf(params.objectif) < 0) {
+            nouveauxObjectifs.push(params.objectif);
+        } else {
+            alert("L'objectif choisi a déjà été ajouté !")
+            return
+        }
+        query_choisie = {"id" : document.cookie, objectifs : nouveauxObjectifs}
+        console.log(query_choisie)
+        axios.post("http://localhost:3001/user/objectif", query_choisie).then(alert("Objectif ajouté avec succès !"))
+        window.location.reload(false);
+    };
 
     const rechercherObjectifs = async (e) => {
         let newData = [];
