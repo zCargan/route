@@ -9,7 +9,11 @@ import Profil from './pages/Profil';
 import Carte from './pages/Carte';
 
 import './styles/App.css'
+<<<<<<< HEAD
 import ProfilUsers from './pages/ProfilUser';
+=======
+import NouvelObjectif from './components/NouvelObjectif';
+>>>>>>> dc9726a (Ajout de tests unitaires)
 
 
 const App = () => {
@@ -17,21 +21,25 @@ const App = () => {
     <div className="page">
       <BrowserRouter>
         <div className="element">
-            <Navbar className="navbar"/>
+          <Navbar className="navbar" />
         </div>
         <div className="element">
-        <Routes>
+          <Routes>
             <Route path="/" element={<Default />} />
             <Route path="/about" element={<About />}></Route>
-            <Route path="/objectifs" element={<Objectifs />} className="objectifs"/>
+            <Route path="/objectifs" element={<Objectifs />} className="objectifs" />
             {/* page par défault  */}
             <Route path="*" element={<Default />} />
             <Route path="/profil" element={<Profil />} />
-            <Route path="/inscription" element={<Page_compte />}/>
+            <Route path="/inscription" element={<Page_compte />} />
             <Route path="/carte" element={<Carte />} />
+<<<<<<< HEAD
             <Route path="/profilUser" element={<ProfilUsers />} />
+=======
+            <Route path='/nouvel_objectif' element={<NouvelObjectif />} />
+>>>>>>> dc9726a (Ajout de tests unitaires)
           </Routes>
-          </div>
+        </div>
       </BrowserRouter>
     </div>
   );
