@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { layer, Map, Layers } from "react-openlayers"
 import "../styles/map.css"
 import Localisation from '../components/Localisation';
