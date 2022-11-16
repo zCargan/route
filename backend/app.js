@@ -114,13 +114,6 @@ app.post('/find', (req, res) => {
     })
 });
 
-
-
-
-
-
-
-
 app.post('/inscription', (req, res) => {
     console.log(req.body)
     const test = new User({
@@ -146,7 +139,6 @@ app.post('/username', (req, res) => {
 })
 
 app.post('/user', (req, res) => {
-    //console.log(req.body.email)
      User.findOne({ email: req.body.email })
      .then(response =>  {
         if (!response) {
@@ -168,30 +160,10 @@ app.post('/user', (req, res) => {
             return res.status(401).json({ error: 'Mot de passe incorrecte !' });
         }
     })
-    User.findOne({ email: req.body.email })
-        .then(response => {
-            if (!response) {
-                console.log("Utilisateur non trouvé !")
-                return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-            }
-            if (req.body.mdp == response.password) {
-                res.cookie('Id', response._id.toString(), {
-                    maxAge: 500000,
-                    // expires works the same as the maxAge
-                    secure: false, // mettre l'attribut à true une fois que le site est en HTTPS
-                    // httpOnly: true,
-                    sameSite: 'lax'
-                });
-                return res.status(200).json(response);
-            }
-            else {
-                console.log("Mot de passe incorrecte")
-                return res.status(401).json({ error: 'Mot de passe incorrecte !' });
-            }
-        })
 });
 
 app.get('/user', (req, res, next) => {
+    console.log(req.query.id)
     User.findOne({ "_id": ObjectId(req.query.id.split("=")[1]) })
         .then(response => {
             return res.status(200).json(response)
@@ -228,7 +200,7 @@ app.get('/getcookie', (req, res) => {
 app.get('/deletecookie', (req, res) => {
     //show the saved cookies
     res.clearCookie('Id')
-    return res.status(200).json(req.cookies);
+        return res.status(200).json({message :"Cookie supprimé"});
 });
 
 app.post('/updateUser', (req, res) => {

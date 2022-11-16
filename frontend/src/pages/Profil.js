@@ -7,6 +7,14 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Popup from "reactjs-popup";
 
+export function checkIfHigherThan0(number){
+    if(Number.isInteger(number)){
+        return number >= 0
+    }
+    else{
+        return "Ce n'est pas un nombre"
+    }
+}
 function Profil() {
     
     const [data, setData] = useState([]);
@@ -21,12 +29,10 @@ function Profil() {
         navigate('/home');
     };
 
-    function supprimerObjectifs(objectifToDelete) {
+    function supprimerObjectifs(objectifToDelete, data) {
         let arrayObjectif=data;
-
         let myIndex = arrayObjectif.indexOf(objectifToDelete);
-        if (myIndex >= 0) {
-            console.log("hey")
+        if (checkIfHigherThan0(myIndex)) {
             arrayObjectif.splice(myIndex, 1);
         }
         let query_choisie = {"id" : document.cookie, objectifs : arrayObjectif}
@@ -76,7 +82,7 @@ function Profil() {
         <h2 className='objectifs-profil'>Mes objectifs</h2>
             <ul>
                 {data.map((objectif) =>
-                    <li key={objectif} className="objectifs"> <p className="titre-objectifs">{objectif}</p><i className="fa-solid fa-circle-xmark" onClick={() => {supprimerObjectifs(objectif)}}></i></li>
+                    <li key={objectif} className="objectifs"> <p className="titre-objectifs">{objectif}</p><i className="fa-solid fa-circle-xmark" onClick={() => {supprimerObjectifs(objectif, data)}}></i></li>
                 )}
             </ul>
             <p className="deconnexion" onClick={deconnexion}>

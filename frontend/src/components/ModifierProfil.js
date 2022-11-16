@@ -1,7 +1,18 @@
 import React, { useState ,useEffect} from 'react';
 import "../styles/App.css"
 import axios from 'axios'
-
+export function checkEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+export function checkVoid(string) {
+    if (Number.isInteger(string)){
+        return "Ce n'est pas un string"
+    }
+    else{
+        return string === ""
+    }
+}
 const ModifierProfil = () => {
     const [pseudo, setPseudo] = useState("");
     const [email, setEmail] = useState("");
@@ -12,10 +23,6 @@ const ModifierProfil = () => {
             setBasePseudo(res.data.username)
             setBaseEmail(res.data.email)
         })}, []);
-    function checkEmail(email) {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-    }
     const test = async (e) => {
         e.preventDefault();
         const infos = {
@@ -23,10 +30,10 @@ const ModifierProfil = () => {
             username : pseudo,
             email : email
         }
-            if(infos.username === ""){
+            if(checkVoid(infos.username)){
                 alert("Veuillez entrer votre Pseudo")
             }
-            else if(infos.email === ""){
+            else if(checkVoid(infos.email)){
                 alert("Veuillez entrer votre Email")
             }
             else{
