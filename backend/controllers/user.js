@@ -11,7 +11,13 @@ exports.updateObjectif = (req, res, next) => {
     let objectifs_key = keys[1];
     let objectifs_value = values[1];
     let objectifs_json = {[objectifs_key]:objectifs_value};
-    User.updateOne(id_json, {$set:objectifs_json})
-    .then(() => res.status(201).json({ message: 'Utilisateur modifié !' }))
-    .catch(error => res.status(400).json({ error }));
+    if (id_value === "" || id_value === undefined){
+        res.status(400).send("Vous n'êtes pas connecté")
+    } else if (objectifs_value === "" || objectifs_value === undefined) {
+        res.status(400).send("Veuillez entrer un objectif")
+    } else {
+        User.updateOne(id_json, {$set:objectifs_json})
+        .then(() => res.status(201).json({ message: 'Utilisateur modifié !' }))
+        .catch(error => res.status(400).json({ error }));
+    }
 }
