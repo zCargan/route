@@ -3,6 +3,21 @@ import '../styles/objectifs.css'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
+// Pour effectuer les tests, il faut mettre en commentaire les lignes 1,2 et 4!
+
+export function testajouterObjectifs(params) {
+    let nouveauxObjectifs = ["Apprendre l'anglais"];
+    if (params === "") {
+        return "Veuillez entrer un objectif !"
+    }
+    else if (nouveauxObjectifs.indexOf(params.objectif) < 0) {
+        nouveauxObjectifs.push(params.objectif);
+        return nouveauxObjectifs
+    } else {
+        return "L'objectif choisi a déjà été ajouté !"
+    }
+}
+
 function Objectifs() {
     const [data, setData] = useState([]);
     const [baseData, setBaseData] = useState([]);
@@ -19,8 +34,10 @@ function Objectifs() {
         })});
 
     function ajouterObjectifs(params) {
-        //console.log(params)
-        if (nouveauxObjectifs.indexOf(params.objectif) < 0) {
+        if (params === "") {
+            return "Veuillez entrer un objectif !"
+        }
+        else if (nouveauxObjectifs.indexOf(params.objectif) < 0) {
             nouveauxObjectifs.push(params.objectif);
         } else {
             alert("L'objectif choisi a déjà été ajouté !")
