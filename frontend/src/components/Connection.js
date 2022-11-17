@@ -31,8 +31,6 @@ const Connection = () => {
             });
     }
 
-
-
     return (
 
                 <div id="connection">

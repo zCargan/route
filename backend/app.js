@@ -114,13 +114,6 @@ app.post('/find', (req, res) => {
     })
 });
 
-
-
-
-
-
-
-
 app.post('/inscription', (req, res) => {
     console.log(req.body)
     const test = new User({
@@ -146,31 +139,31 @@ app.post('/username', (req, res) => {
 })
 
 app.post('/user', (req, res) => {
-    //console.log(req.body.email)
-    User.findOne({ email: req.body.email })
-        .then(response => {
-            if (!response) {
-                console.log("Utilisateur non trouvé !")
-                return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-            }
-            if (req.body.mdp == response.password) {
-                res.cookie('Id', response._id.toString(), {
-                    maxAge: 500000,
-                    // expires works the same as the maxAge
-                    secure: false, // mettre l'attribut à true une fois que le site est en HTTPS
-                    // httpOnly: true,
-                    sameSite: 'lax'
-                });
-                return res.status(200).json(response);
-            }
-            else {
-                console.log("Mot de passe incorrecte")
-                return res.status(401).json({ error: 'Mot de passe incorrecte !' });
-            }
-        })
+     User.findOne({ email: req.body.email })
+     .then(response =>  {
+        if (!response) {
+        console.log("Utilisateur non trouvé !")
+        return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+      }
+        if (req.body.mdp == response.password){
+            res.cookie('Id', response._id.toString() ,{
+                maxAge: 5000000,
+                // expires works the same as the maxAge
+                secure: false, // mettre l'attribut à true une fois que le site est en HTTPS
+                // httpOnly: true,
+                sameSite: 'lax'
+            });
+            return res.status(200).json(response);
+        }
+        else{
+            console.log("Mot de passe incorrecte")
+            return res.status(401).json({ error: 'Mot de passe incorrecte !' });
+        }
+    })
 });
 
 app.get('/user', (req, res, next) => {
+    console.log(req.query.id)
     User.findOne({ "_id": ObjectId(req.query.id.split("=")[1]) })
         .then(response => {
             return res.status(200).json(response)
@@ -207,6 +200,15 @@ app.get('/getcookie', (req, res) => {
 app.get('/deletecookie', (req, res) => {
     //show the saved cookies
     res.clearCookie('Id')
-    return res.status(200).json(req.cookies);
+        return res.status(200).json({message :"Cookie supprimé"});
 });
+
+app.post('/updateUser', (req, res) => {
+    let id_value = req.body.id.split("=")[1];
+    let id_json = {"_id":ObjectId(id_value)}
+    let modif_json = {[Object.keys(req.body)[1]]:req.body.username, [Object.keys(req.body)[2]]:req.body.email}
+   User.updateOne(id_json, {$set:modif_json})
+    .then(() => res.status(201).json({ message: 'Utilisateur modifié !' }))
+    .catch(error => res.status(400).json({ error }));
+ });
 module.exports = app //export la constante pour que l'on puisse l'utiliser partout
