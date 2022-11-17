@@ -10,6 +10,7 @@
 
 ul{
     display: inline-block;
+    width: 100%
 }
 
 .fa-circle-plus {
@@ -29,7 +30,7 @@ ul{
     cursor: pointer;
 }
 
-p{
+.titre-objectifs{
     margin: 0;
     padding-right: 40px;
 }
