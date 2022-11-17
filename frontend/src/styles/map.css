@@ -1,0 +1,16 @@
+.map {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-position-x: 150px;
+    border: 5px solid black;
+    size-adjust: 100px;
+}
+
+.find_user {
+    top: 1000px;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    background-color: #655b5b;
+    color: #3d3939
+}

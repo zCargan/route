@@ -1,0 +1,81 @@
+.deconnexion, .modifierProfil{
+    border-radius: 10px;
+    margin: 5px;
+    width: 60%;
+    background-color: #980012;
+    margin-left: 20%;
+    transition: all 0.3s ease-out; 
+    text-align: center;
+    color: #d9d9d9;
+    padding: 3px;
+}
+
+.modifierProfil{
+    border: none;
+    margin: 0;
+}
+
+.deconnexion:hover ,.modifierProfil:hover{
+    background-color: #d9d9d9;
+    color:#980012;
+    transition: all 0.3s ease-out; 
+    cursor: pointer;
+}
+
+.profil{
+    background-color: #a09f9f;
+    border-radius: 10px;
+    padding: 3%;
+    padding-top: 0;
+}
+
+/* .formulaireProfil{
+    background-color: #a09f9f;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    width: 100%;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+} */
+
+.objectifs-profil{
+    background-color: #a09f9f;
+    border-radius: 10px;
+    padding: 1%;
+}
+
+.fa-circle-user{
+    font-size: 750%;
+    display: grid;
+    width: 10%;
+}
+
+.text{
+    position: absolute;
+    top:10%;
+    left:37.5%;
+    font-size: 150%;
+}
+
+.popup-content {
+    margin: auto;
+    background-color: #a09f9f;
+    border-radius: 10px;
+    width: 50%;
+    padding: 5px;
+    background-blend-mode: darken;
+  }
+  .popup-arrow {
+    color: #a09f9f;
+  }
+  [role='tooltip'].popup-content {
+    width: 200px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+  }
+  .popup-overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  [data-popup='tooltip'].popup-overlay {
+    background: transparent;
+  }
+  

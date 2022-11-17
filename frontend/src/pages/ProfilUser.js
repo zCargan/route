@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import ButtonFollow from "../components/BoutonFollow";
 
-function Profil(){
+function ProfilUser(){
 
     const userId = useLocation();
     
@@ -13,11 +13,11 @@ function Profil(){
             <p className="userName">{userId.state.username}</p>
             <ul>
             {userId.state.objectifs.map((objectif) =>
-                <li className="objectifsUser"><p className="titre-objectifs">{objectif}</p></li>
+                <li key={objectif._id} className="objectifsUser"><p className="titre-objectifs">{objectif}</p></li>
             )}
             </ul>
         </div>
     )
 }
 
-export default Profil;
+export default ProfilUser;

@@ -41,7 +41,7 @@ function BarreRecherche(){
     
 
     const versPageProfil = (data) =>{
-        navigate('/profil', {state: data});
+        navigate('/profilUser', {state: data});
     }
 
 

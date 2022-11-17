@@ -26,9 +26,8 @@
 .text_zone_button{
     border-radius: 10px;
     margin: 5px;
-    width: 60%;
+    width: 95%;
     background-color: #980012;
-    margin-left: 20%;
     transition: all 0.3s ease-out; 
     text-align: center;
     color: #d9d9d9;
@@ -40,6 +39,7 @@
     background-color: #d9d9d9;
     color:#980012;
     transition: all 0.3s ease-out; 
+    cursor: pointer;
 }
 .text_zone input:focus{
     outline: none;

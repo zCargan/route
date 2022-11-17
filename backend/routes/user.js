@@ -7,6 +7,8 @@ const userCtrl = require('../controllers/user')
 router.post('/inscription', userCtrl.createUser)
 
 router.get('/:id', userCtrl.getOneUser)
+
+router.post('/objectif', userCtrl.updateUserObjectif)
  
 router.put('/:id', userCtrl.modifyUser)
 
@@ -18,7 +20,8 @@ router.post('/email', userCtrl.getOneMail)
 
 router.post('/username', userCtrl.getOneUsername)
 
-router.post('/login', userCtrl.login)
+router.post('/login', userCtrl.getCookie)
 
+router.post('/find', userCtrl.getUserCity)
 
 module.exports = router;

@@ -17,11 +17,13 @@
 .fa-bars:hover{
     transition: all 0.3s ease-out;
     color: #d9d9d9;
+    cursor: pointer;
 }
 
 .fa-times:hover{
     transition: all 0.3s ease-out;
     color: #d9d9d9;
+    cursor: pointer;
 }
 
 .active {
@@ -100,7 +102,6 @@
     background-color: #655b5b;
     width: 128px;
     height: 100%;
-    
 }
 
 .navbar .nav-list{
@@ -110,7 +111,7 @@
 .navbar-active {
     background-color: #655b5b;
     width: auto;
-    height:     100%;
+    height: 100%;
 }
 
 ul{

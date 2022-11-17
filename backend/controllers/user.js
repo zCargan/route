@@ -1,25 +1,27 @@
 const User = require("../models/user");
 
+const app = require("../app");
+const mongoose = require('mongoose');
+const ObjectId = require('mongodb').ObjectID;
+const cookieParser = require('cookie-parser')
 
 
-exports.createUser = (req, res, next) => {
-    const user = new User({
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://example.com/', true);
+xhr.withCredentials = true;
+xhr.send(null);
+
+exports.createUser = (req, res) => {
+  console.log(req.body)
+  const test = new User({
       ...req.body
-    });
-    user.save().then(
-      () => {
-        res.status(201).json({
-          message: 'Post saved successfully!'
-        });
-      }
-    ).catch(
-      (error) => {
-        res.status(400).json({
-          error: error
-        });
-      }
-    );
-  };
+  })
+  console.log(test)
+  test.save()
+      .then(() => res.status(201).json({ message: 'utilisateur ajouté' }))
+      .catch(error => res.status(400).json({ error }));
+};
 
 exports.getOneUser = (req, res, next) => {
     User.findOne({
@@ -36,17 +38,34 @@ exports.getOneUser = (req, res, next) => {
       }
     );
   };
+
+exports.updateUserObjectif = (req, res, next) => {
+  let keys = Object.keys(req.body)
+  let values = Object.values(req.body)
+  let id_value = values[0].split("=")[1];
+  let id_json = {"_id":ObjectId(id_value)}
+  let objectifs_key = keys[1];
+  let objectifs_value = values[1];
+  let objectifs_json = {[objectifs_key]:objectifs_value};
+  if (id_value === "" || id_value === undefined){
+      res.status(400).send("Vous n'êtes pas connecté")
+  } else if (objectifs_value === "" || objectifs_value === undefined) {
+      res.status(400).send("Veuillez entrer un objectif")
+  } else {
+      User.updateOne(id_json, {$set:objectifs_json})
+      .then(() => res.status(201).json({ message: 'Utilisateur modifié !' }))
+      .catch(error => res.status(400).json({ error }));
+  }
+}
   
 exports.modifyUser = (req, res, next) => {
     const user = new User({
       _id: req.params.id,
-      nom : req.body.nom,
-      prenom : req.body.prenom,
-      pseudonyme : req.body.pseudonyme,
-      age : req.body.age,
+      username : req.body.pseudonyme,
       email : req.body.email,
       password : req.body.password,
       objectifs : req.body.objectifs,
+      city : req.body.city,
     });
     User.updateOne({_id: req.params.id}, user).then(
       () => {
@@ -78,7 +97,33 @@ exports.deleteUser = (req, res, next) => {
       }
     );
   };
-  
+
+
+exports.getCookie = (req, res) => {
+  User.findOne({ email: req.body.email })
+  .then(response =>  {
+    if (!response) {
+    console.log("Utilisateur non trouvé !")
+    return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+    }
+    if (req.body.mdp == response.password){
+        res.cookie('Id', response._id.toString() ,{
+            maxAge: 5000000,
+            // expires works the same as the maxAge
+            secure: false, // mettre l'attribut à true une fois que le site est en HTTPS
+            // httpOnly: true,
+            sameSite: 'lax'
+        });
+        console.log(res.cookie)
+        return res.status(200).json(response);
+    }
+    else{
+      console.log("Mot de passe incorrecte")
+      return res.status(401).json({ error: 'Mot de passe incorrecte !' });
+    }
+  })
+};
+
 exports.getAllUser = (req, res, next) => {
     User.find().then(
       (users) => {
@@ -93,30 +138,29 @@ exports.getAllUser = (req, res, next) => {
     );
   };
 
-  exports.getOneMail = (req, res, next) => {
-    User.findOne({ email : req.body.email})
-    .then(response => {
-      if(!response){
-        return res.send("Ok")
+  exports.getOneMail = (req, res) => {
+    User.findOne({ email: req.body.email })
+        .then(response => {
+            if (!response) {
+                return res.send(true)
+            }
+            else {
+                return res.send(false)
+            }
+        })
+}
 
-      }
-      else {
-        return res.send('Not ok')
-      };
-    });
-  };
-
-  exports.getOneUsername = (req, res, next) => {
+  exports.getOneUsername = (req, res) => {
     User.findOne({ username: req.body.username })
-    .then(response => {
-      if(!response){
-        return res.send("ok")
-      }
-      else {
-        return res.send("not ok")
-      }
-    })
-  }
+        .then(response => {
+            if (!response) {
+                return res.send(true)
+            }
+            else {
+                return res.send(false)
+            }
+        })
+}
 
   exports.login = (req, res ,next) => {
     User.findOne({ email: req.body.email})
@@ -143,3 +187,12 @@ exports.getAllUser = (req, res, next) => {
 
     })
   }
+
+exports.getUserCity = (req, res) => {
+  let ville = req.body.city;
+  console.log(ville)
+  User.find({ "city": ville }).then(response => {
+      res.status(200).json(response)
+      console.log(response)
+  })
+}

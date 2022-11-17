@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "../styles/connection.css"
 import "../styles/App.css"
+//import { response } from '../../../backend/app';
 
 const Connection = () => {
 
@@ -13,7 +14,7 @@ const Connection = () => {
 
     const navigateToHome = () => {
         // 👇️ navigate to /contacts
-        navigate('/');
+        navigate('/home');
       };
 
     const login_verfif = async (e) => {
@@ -22,7 +23,7 @@ const Connection = () => {
             email :email,
             mdp :mdp
         };
-        axios.post("http://localhost:3001/user/login", values /*,{ withCredentials: true }*/)
+        axios.post("http://localhost:3001/user/login", values, { withCredentials: true })
             .then(response => {
                 alert("Vous êtes connecté")
                 navigateToHome()
