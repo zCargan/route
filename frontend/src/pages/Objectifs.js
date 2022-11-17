@@ -27,7 +27,8 @@ function Objectifs() {
     let query_choisie;
 
     useEffect(() => {
-        axios.get('http://localhost:3001/user', {params: {"id" : document.cookie}}).then(res => {
+        let id = document.cookie.split("=")[1];
+        axios.get(`http://localhost:3001/user/${id}`, {params: {"id" : document.cookie}}).then(res => {
             for (let i = 0; i < res.data.objectifs.length; i++){
                 nouveauxObjectifs.push(res.data.objectifs[i])
             }

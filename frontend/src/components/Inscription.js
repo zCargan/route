@@ -52,15 +52,15 @@ const Inscription = () => {
         if ((username === "") || (email === "") || (password === "") || (samePassword === "")) {
             alert("Veuillez compléter tous les champs");
         } else {
-            axios.post("http://localhost:3001/username", infos)
+            axios.post("http://localhost:3001/user/username", infos)
                 .then(response => {
-                    if (response.data === "not ok") {
+                    if (response.data === false) {
                         alert("Username already used");
                     } else {
                         if (checkEmail(email)) {
-                            axios.post("http://localhost:3001/email", infos)
+                            axios.post("http://localhost:3001/user/email", infos)
                                 .then(response => {
-                                    if (response.data === "not ok") {
+                                    if (response.data === false) {
                                         alert("Email already used")
                                     } else {
                                         if (password === samePassword) {
@@ -68,7 +68,7 @@ const Inscription = () => {
                                                 alert("Mot de passe trop court")
                                             } else {
                                                 axios
-                                                    .post("http://localhost:3001/inscription", données_envoyées)
+                                                    .post("http://localhost:3001/user/inscription", données_envoyées)
                                                     .then(response => {
                                                         if (response.status === 201) {
                                                             emailjs.sendForm('service_wco0ss6', 'template_f9ar9zo', e.target, 'uX_z-9_6PbAb24o0e')

@@ -1,6 +1,6 @@
 const request = require('supertest');
-const user = require('./models/user');
-const app = require('./app.js');
+const user = require('../models/user');
+const app = require('../app.js');
 
 describe('updateUser', () => {
     it("retourne 201 si la modification est réussie", async () => {

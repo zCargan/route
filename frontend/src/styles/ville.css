@@ -4,3 +4,11 @@
     border-radius: 10px;
     text-align: center;
 }
+
+.button_validation:hover {
+    background-color: #d9d9d9;
+    color: #980012;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}

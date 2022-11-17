@@ -19,13 +19,13 @@ const Carte = () => {
         setZoom0(LouvainLaNeuveZoom)
     }
 
-
-    axios.get('http://localhost:3001/user', { params: { "id": document.cookie } }).then(res => {
+    let id = document.cookie.split("=")[1];
+    axios.get(`http://localhost:3001/user/${id}`, { params: { "id": document.cookie } }).then(res => {
         setCity(res.data.city)
     })
 
     const chercher = async (e) => {
-        axios.post('http://localhost:3001/find', { "city": city }).then(response => {
+        axios.post('http://localhost:3001/user/find', { "city": city }).then(response => {
             const array_user = [];
             for (let i = 0; i < response.data.length; i++) {
                 array_user.push(response.data[i].username);

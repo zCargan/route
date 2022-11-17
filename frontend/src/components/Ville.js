@@ -27,14 +27,16 @@ const Ville = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/ville").then(response => {
+        let id = document.cookie.split("=")[1];
+        axios.get("http://localhost:3001/ville/commune").then(response => {
             let array = [];
-            for (let i = 0; i < response.data.length; i++) {
-                array.push(response.data[i].nouvelle_ville)
+            for (let i = 0; i < response.data[0].Villes.length; i++) {
+                array.push(response.data[0].Villes[i])
                 setVilles(array)
             }
+            array = array.sort()
         });
-        axios.get('http://localhost:3001/user', { params: { "id": document.cookie } }).then(res => {
+        axios.get(`http://localhost:3001/user/${id}`, { params: { "id": document.cookie } }).then(res => {
             setUsername(res.data.username)
             setEmail(res.data.email)
             setPassword(res.data.password)
@@ -45,8 +47,9 @@ const Ville = () => {
     }, [])
 
     const validation = async (e) => {
+        let id = document.cookie.split("=")[1];
         axios
-            .post("http://localhost:3001/update_profil", donnees_a_jour)
+            .put(`http://localhost:3001/user/${id}`, donnees_a_jour)
             .then(response => {
                 if (response.status == 201) {
                     alert("Profil modifié")
@@ -69,17 +72,6 @@ const Ville = () => {
     };
 
 
-    // ============================================================ AJOUTER NOUVELLES VILLES ============================================================
-    const add_new_city = async (e) => {
-        e.preventDefault();
-        const data = {
-            nouvelle_ville
-        }
-        axios.post("http://localhost:3001/ville", data)
-    }
-
-
-
     // ============================================================ RENVOIE LA PAGE HTML ============================================================
     return (
         <div>
@@ -87,17 +79,11 @@ const Ville = () => {
             <label>Votre Ville : </label>
             <select value={city} onChange={e => setCity(e.target.value)}>
                 <option>Veuillez séléctionnez votre ville</option>
-                {villes.map((ville) => (
-                    <option key={ville._id}>{ville}</option>
+                {villes.map((Villes) => (
+                    <option key={Villes}>{Villes}</option>
                 ))}
             </select>
             <br />
-            <br />
-            <div>
-                <label>Ville absente? </label>
-                <input type="text" placeholder="Nom de la ville" onChange={(e) => setNouvelleVille(e.target.value)} />
-                <button onClick={add_new_city} >Ajouter</button>
-            </div>
             <br />
             <div className='button_validation'>
                 <label onClick={validation}>

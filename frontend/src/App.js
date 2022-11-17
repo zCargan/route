@@ -9,6 +9,7 @@ import Profil from './pages/Profil';
 import Carte from './pages/Carte';
 
 import './styles/App.css'
+import ProfilUsers from './pages/ProfilUser';
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/profil" element={<Profil />} />
             <Route path="/inscription" element={<Page_compte />}/>
             <Route path="/carte" element={<Carte />} />
+            <Route path="/profilUser" element={<ProfilUsers />} />
           </Routes>
           </div>
       </BrowserRouter>

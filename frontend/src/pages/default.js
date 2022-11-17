@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import BarreRecherche from '../components/BarreDeRecherche';
+
+
 
 
 const Default = () => {
@@ -6,7 +9,7 @@ const Default = () => {
     return (
         <div className='div_global'>
             <div>
-                <p className='bienvenue_text'>
+            <BarreRecherche/>                <p className='bienvenue_text'>
                     Bienvenue sur la page d'accueil du site
                 </p>
             </div>
