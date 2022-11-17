@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
+import React, { useState } from 'react';
+import  axios  from 'axios';
 
 import "../styles/barrederecherche.css"
 import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -14,7 +14,9 @@ function BarreRecherche(){
 
     const navigate = useNavigate();
 
-    const eEffect = () => {
+    
+
+    const recupData = () => {
         axios.get('http://localhost:3001/user')
         .then(res => {
             setUser(res.data)
@@ -25,7 +27,7 @@ function BarreRecherche(){
     const handleFilter = (event) => {
         const searchWord = event.target.value
 
-        eEffect();
+        recupData();
         const newFilter = user.filter((value) => {
             return value.username.toLowerCase().includes(searchWord.toLowerCase());
         });
@@ -36,22 +38,24 @@ function BarreRecherche(){
             setFilteredData(newFilter);
         }
     }
+    
 
     const versPageProfil = (data) =>{
         navigate('/profil', {state: data});
     }
 
 
+
     return(
-        <div className='search'>
+        <div className='search' >
             <div className='searchInput'>
-            <input type='text' placeholder='Chercher un utilisateur' data={user} onChange={handleFilter}></input>
+            <input type='text' placeholder='Chercher un utilisateur' data={user} onChange={handleFilter} data-testid='searchInput'></input>
             </div>
             {filteredData.length !== 0 && (
-            <div className='dataResult'>
+            <div className='dataResult' data-testid='dataResult'>
                 {filteredData.slice(0, 10).map((value, key) => {
-                    return <a className='dataItem'>
-                            <p onClick={()=>{versPageProfil(value)}}>{value.username}</p>
+                    return <a className='dataItem' >
+                            <p  onClick={()=>{versPageProfil(value)}}>{value.username}</p>
                         </a>
                 })}
             </div>
