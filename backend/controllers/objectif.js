@@ -23,7 +23,7 @@ exports.createObjectif = (req, res, next) => {
 
 exports.getOneObjectif = (req, res, next) => {
     Objectif.findOne({
-      _id: req.params.id
+      objectif: req.params.name
     }).then(
       (obj) => {
         res.status(200).json(obj);
