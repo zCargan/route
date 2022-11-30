@@ -23,9 +23,15 @@ function Objectifs() {
     const [data, setData] = useState([]);
     const [baseData, setBaseData] = useState([]);
     const [searchedObjectifs, setSearchedObjectifs] = useState("")
+    let name;
+    let description;
+    let frequence;
+    let onProfile = true;
+    let share = true;
+    let type;
 
     let nouveauxObjectifs = [];
-    let query_choisie;
+    let objectifUser;
 
     useEffect(() => {
         let id = document.cookie.split("=")[1];
@@ -37,18 +43,53 @@ function Objectifs() {
     });
 
     function ajouterObjectifs(params) {
-        if (params === "") {
-            return "Veuillez entrer un objectif !"
+        let id = document.cookie.split("=")[1];
+        let verifie = true;
+        for (let i = 0; i < nouveauxObjectifs.length; i++) {
+            if (params === "") {
+                return "Veuillez entrer un objectif !"
+            }
+            else if (nouveauxObjectifs[i].name === params.objectif) {
+                verifie = false;
+            }
         }
-        else if (nouveauxObjectifs.indexOf(params.objectif) < 0) {
-            nouveauxObjectifs.push(params.objectif);
+
+        if (verifie) {
+            if (params.objectif === "Courir plus") {
+                description ="Courir 2x"
+                frequence="Hebdomadaire"
+                name=params.objectif;
+                type=params.type
+            } else if (params.objectif === "Aller courir") {
+                description ="Courir 2x"
+                frequence="Hebdomadaire"
+                name=params.objectif;
+                type=params.type
+            } else if (params.objectif === "Manger moins de viande") {
+                description ="Manger moins de viande"
+                frequence="Journalier"
+                name=params.objectif;
+                type=params.type
+            } else if (params.objectif === "Apprendre l'anglais") {
+                description ="Être B2 avant la fin de l'année"
+                frequence="Hebdomadaire"
+                name=params.objectif;
+                type=params.type
+            } else if (params.objectif === "Manger plus de légumes") {
+                description ="Manger plus de légumes"
+                frequence="Mensuel"
+                name=params.objectif;
+                type=params.type
+            }
         } else {
             alert("L'objectif choisi a déjà été ajouté !")
             return
         }
-        query_choisie = { "id": document.cookie, objectifs: nouveauxObjectifs }
-        console.log(query_choisie)
-        axios.post("http://localhost:3001/user/objectif", query_choisie).then(alert("Objectif ajouté avec succès !"))
+        objectifUser = {"name":name,"description":description, "type":type, "frequence":frequence, "onProfile":onProfile, "share":share }
+        nouveauxObjectifs.push(objectifUser)
+        let dataToSend = {"id" : id, "objectifs" : nouveauxObjectifs}
+
+        axios.post("http://localhost:3001/user/objectif", dataToSend).then(alert("Objectif ajouté avec succès !"))
         window.location.reload(false);
     };
 
@@ -62,14 +103,11 @@ function Objectifs() {
                 objectif: searchedObjectifs
             }
         }
-        console.log(searchedObjectifs)
         for (let i = 0; i < baseData.length; i++) {
-            console.log(baseData[i].objectif)
             if (searchedObjectifs === "") {
                 newData.push(baseData[i])
             } else if (baseData[i].objectif.toLowerCase().includes(searchedObjectifs.toLowerCase())) {
                 newData.push(baseData[i])
-                console.log(baseData[i].objectif.toLowerCase().includes(searchedObjectifs.toLowerCase()))
             }
         }
         setData(newData)
