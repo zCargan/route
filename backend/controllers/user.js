@@ -38,6 +38,7 @@ exports.getOneUser = (req, res, next) => {
   };
 
 exports.updateUserObjectif = (req, res, next) => {
+  console.log(req.params)
   let keys = Object.keys(req.body)
   let values = Object.values(req.body)
   let id_value = values[0];
@@ -75,7 +76,7 @@ exports.modifyUser = (req, res, next) => {
       userfollows : req.body.userfollows,
       city : req.body.city,
     });
-    User.updateOne({_id: req.params.id}, user).then(
+    User.updateOne({_id: req.params.id}, {$set:user}).then(
       () => {
         res.status(201).json({
           message: 'User updated successfully!'

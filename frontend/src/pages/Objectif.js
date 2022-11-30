@@ -6,33 +6,45 @@ import { useNavigate } from 'react-router-dom';
 function Objectif  (objectif_name)  {
     const [name, setName] = useState("");
     const [frequence, setFrequence] = useState("");
-    const [prive, setPrive] = useState("");
+    const [onProfile, setOnProfile] = useState("");
     const [description, setDescription] = useState("");
     const [type, setType] = useState("");
     const [clique, setClique] =useState("")
-    const [id, setId]=useState("")
+    const [share, setShare] = useState("")
+    const [shareBool, setShareBool] = useState(false)
+    const [onProfileBool, setOnProfileBool] = useState(false)
+    const [data, setData] = useState([])
     let jsonToSend = {}
     const navigate = useNavigate();
+    let id = "635ba113935a45c92d42fe3d";
+    objectif_name = "Manger moins de viande"
 
     useEffect(() => {
-        objectif_name = "Manger moins de viande"
 
-        let idUser = "635ba113935a45c92d42fe3d";
-        axios.get(`http://localhost:3001/user/${idUser}`, { params: { "id": idUser } }).then(res => {
+        axios.get(`http://localhost:3001/user/${id}`, { params: { "id": id } }).then(res => {
             for (let i=0 ; i < res.data.objectifs.length;i++){
                 if (res.data.objectifs[i].name===objectif_name){
                     setName(res.data.objectifs[i].name)
                     setFrequence(res.data.objectifs[i].frequence)
-                    setPrive(res.data.objectifs[i].prive)
+                    if (res.data.objectifs[i].onProfile){
+                        setOnProfile("oui")
+                        setOnProfileBool(true)
+                    } else {
+                        setOnProfile("non")
+                    }
+                    if (res.data.objectifs[i].share ){
+                        setShare("oui")
+                        setShareBool(true)
+                    } else {
+                        setShare("non")
+                    }
+                    // setOnProfile(res.data.objectifs[i].onProfile)
+                    setDescription(res.data.objectifs[i].description)
+                    setType(res.data.objectifs[i].type)
                     i= res.data.objectifs.length
                 }
             }
         })
-        axios.get(`http://localhost:3001/objectif/${objectif_name}`,{ params: { "name": objectif_name } }).then(res => {
-            setDescription(res.data.description)
-            setType(res.data.type)
-            setId(res.data._id)
-        }).catch(err => console.log(err));
     }, []);
 
     function truc(){
@@ -40,22 +52,24 @@ function Objectif  (objectif_name)  {
     }
 
     function sendData (){
-        if (prive === "False"){
-            setPrive(false)
+        axios.get(`http://localhost:3001/user/${id}`).then(res => {
+           setData(res.data.objectifs)
+           console.log(res.data.objectifs)
+        })
+        let dataToSend =[]
+        for (let i=0; i<data.length ;i++){
+            console.log(data[i])
+            if(data[i].name !== name){
+                dataToSend.push(data[i])
+            }
         }
-        else if(prive === "True"){
-            setPrive(true)
-        }
-        jsonToSend = {"_id":id, "type":type, "objectif":name,"description":description}
-        axios.put(`http://localhost:3001/objectif/${id}`,jsonToSend)
-        /*  
-        console.log(name)
-        console.log(frequence)
-        console.log(type)
-        console.log(description) 
-        */
-       navigateToHome()
-    }
+        jsonToSend = {"type":type, "name":name,"description":description, "frequence":frequence, "onProfile":onProfile, "share":share }
+        console.log(jsonToSend)
+        dataToSend.push(jsonToSend)
+        console.log(dataToSend)
+        axios.post(`http://localhost:3001/user/objectif`, dataToSend)
+/*        navigateToHome()
+ */    }
 
     const navigateToHome = () => {
         // 👇️ navigate to /contacts
@@ -65,7 +79,7 @@ function Objectif  (objectif_name)  {
       if (clique){
         return(
             <div>
-                <form className='form' onSubmit={sendData}>
+                <form className='form'>
                     <label>Nom</label>
                     <input type="text" defaultValue={name} onChange={(e) => setName(e.target.value)}></input>
                     <br></br>
@@ -84,13 +98,19 @@ function Objectif  (objectif_name)  {
                     <option value="Mensuel">Mensuel</option>
                     </select>
                     <br></br>
-                    <div onChange={(e) => setPrive(e.target.value)}>
+                    <div onChange={(e) => setOnProfile(e.target.value)}>
                     <label>Rendre L'objectif visible sur votre profil ? Oui</label>
-                    <input type="radio" name="prive" defaultChecked={prive} value="True"></input>
+                    <input type="radio" name="onProfile" defaultChecked={onProfileBool} value="True"></input>
                     <label>Non</label>
-                    <input type="radio" name="prive" defaultChecked={!prive} value="False"></input>
-                    <input type="submit" className="button_submit" value="Valider"/>
+                    <input type="radio" name="onProfile" defaultChecked={!onProfileBool} value="False"></input>
                     </div>
+                    <div onChange={(e) => setShare(e.target.value)}>
+                    <label>Partager votre objectif aux autres utilisateurs ? Oui</label>
+                    <input type="radio" name="share" defaultChecked={shareBool} value="True"></input>
+                    <label>Non</label>
+                    <input type="radio" name="share" defaultChecked={!shareBool} value="False"></input>
+                    </div>
+                    <input type="button" className="button_submit" value="Valider" onClick={sendData}/>
                     <br></br>
                     <button className="button_submit" onClick={() => {truc();}}>Annuler</button>
                 </form> 
@@ -109,9 +129,11 @@ function Objectif  (objectif_name)  {
                 <br></br>
                 Fréquence : {frequence}
                 <br></br>
-                Privé : {String(prive)}
+                Afficher sur votre profil ? : {onProfile}
                 <br></br>
-                <button onClick={() => {truc();}}>Modifier</button>
+                Partager avec les autres utilisateur : {share}
+                <br></br>
+                <button onClick={() => {truc();}} className="button_submit">Modifier</button>
             </div>
         );
     }
