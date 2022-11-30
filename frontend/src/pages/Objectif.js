@@ -54,19 +54,15 @@ function Objectif  (objectif_name)  {
     function sendData (){
         axios.get(`http://localhost:3001/user/${id}`).then(res => {
            setData(res.data.objectifs)
-           console.log(res.data.objectifs)
         })
         let dataToSend =[]
         for (let i=0; i<data.length ;i++){
-            console.log(data[i])
             if(data[i].name !== name){
                 dataToSend.push(data[i])
             }
         }
         jsonToSend = {"type":type, "name":name,"description":description, "frequence":frequence, "onProfile":onProfile, "share":share }
-        console.log(jsonToSend)
         dataToSend.push(jsonToSend)
-        console.log(dataToSend)
         axios.post(`http://localhost:3001/user/objectif`, dataToSend)
 /*        navigateToHome()
  */    }
