@@ -11,7 +11,7 @@ function Objectif  (objectif_name)  {
     const [clique, setClique] =useState("")
 
     useEffect(() => {
-        objectif_name = "Aller courir"
+        objectif_name = "Manger moins de viande"
 
         let id = "635ba113935a45c92d42fe3d";
         axios.get(`http://localhost:3001/user/${id}`, { params: { "id": id } }).then(res => {
@@ -29,33 +29,56 @@ function Objectif  (objectif_name)  {
             setDescription(res.data.description)
             setType(res.data.type)
         }).catch(err => console.log(err));
-        console.log(name)
-        console.log(frequence)
-        console.log(prive)
-        console.log(description)
-        console.log(type)
-
     }, []);
 
     function truc(){
         setClique(!clique)
-        console.log(!clique)
     }
+    const sendData = async (e) =>{
+    /*         console.log(name)
+            console.log(frequence)
+            console.log(type)
+            console.log(description) */
+        if (prive === "False"){
+            setPrive(false)
+        }
+        else if(prive === "True"){
+            setPrive(true)
+        }
+        console.log(prive)
+    }
+
     if (clique){
         return(
             <div>
-                <form className='form'>
+                <form className='form' onSubmit={sendData}>
                     <label>Nom</label>
-                    <input type="text" value={name}></input>
+                    <input type="text" defaultValue={name} onChange={(e) => setName(e.target.value)}></input>
+                    <br></br>
                     <label>Type</label>
-                    <input type="text" value={type}></input>
+                    <input type="text" defaultValue={type} onChange={(e) => setType(e.target.value)}></input>
+                    <br></br>
                     <label>Description</label>
-                    <input type="text" value={description}></input>
+                    <input type="text" defaultValue={description} onChange={(e) => setDescription(e.target.value)}></input>
+                    <br></br>
                     <label>Frequence</label>
-                    <input type="text" value={frequence}></input>
-                    <label>Privé</label>
-                    <input type="text" value={prive}></input>
-                    <button onClick={() => {truc();}}>Valider</button>
+                    <select name="frequence" id="frequence" onChange={(e) => setFrequence(e.target.value)}>
+                    <option value={frequence}>{frequence}</option>
+                    <option value="Journalier">Journalier</option>
+                    <option value="Hebdomadaire">Hebdomadaire</option>
+                    <option value="Bimensuel">Bimensuel</option>
+                    <option value="Mensuel">Mensuel</option>
+                    </select>
+                    <br></br>
+                    <div onChange={(e) => setPrive(e.target.value)}>
+                    <label>Rendre L'objectif visible sur votre profil ? Oui</label>
+                    <input type="radio" name="prive" defaultChecked={prive} value="True"></input>
+                    <label>Non</label>
+                    <input type="radio" name="prive" defaultChecked={!prive} value="False"></input>
+                    <input type="submit" className="button_submit" value="Valider"/>
+                    </div>
+                    <br></br>
+                    <button className="button_submit" onClick={() => {truc();}}>Annuler</button>
                 </form> 
             </div>
         );
@@ -64,15 +87,15 @@ function Objectif  (objectif_name)  {
         return (
 
             <div className='form'>
-                <a>Nom </a>{name}
+                Nom : {name}
                 <br></br>
-                <a>Type </a>{type}
+                Type : {type}
                 <br></br>
-                <a>Description </a>{description}
+                Description : {description}
                 <br></br>
-                <a>Fréquence </a>{frequence}
+                Fréquence : {frequence}
                 <br></br>
-                <a>Privé </a>{prive}
+                Privé : {String(prive)}
                 <br></br>
                 <button onClick={() => {truc();}}>Modifier</button>
             </div>
