@@ -55,6 +55,15 @@ exports.updateUserObjectif = (req, res, next) => {
       .catch(error => res.status(400).json({ error }));
   }
 }
+
+exports.updateUserFollowers = (req, res, next) => {
+  let newfollowers = {$set: {userfollows : req.body.userfollows}};
+
+  User.updateOne({_id: req.params.id}, newfollowers)
+    .then(() => res.status(201).json({ message: 'Utilisateur suivi.' }))
+    .catch(error => res.status(400).json({ error }));
+  
+}
   
 exports.modifyUser = (req, res, next) => {
     const user = new User({
@@ -63,6 +72,7 @@ exports.modifyUser = (req, res, next) => {
       email : req.body.email,
       password : req.body.password,
       objectifs : req.body.objectifs,
+      userfollows : req.body.userfollows,
       city : req.body.city,
     });
     User.updateOne({_id: req.params.id}, user).then(

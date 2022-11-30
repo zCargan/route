@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema({
     password: { type: String, require: true },
     confirmed: { type: Boolean, require: true },
     objectifs: { type: Array, require: true },
+    userfollows: { type: Array, require: true },
     city: { type: String, require: true }
 })
 

@@ -55,7 +55,7 @@ function BarreRecherche(){
             <div className='dataResult' data-testid='dataResult'>
                 {filteredData.slice(0, 10).map((value, key) => {
                     return <a className='dataItem' >
-                            <p  onClick={()=>{versPageProfil(value)}}>{value.username}</p>
+                            <p key={value.id} onClick={()=>{versPageProfil(value)}}>{value.username}</p>
                         </a>
                 })}
             </div>
