@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import '../styles/objectif.css'
+import { useNavigate } from 'react-router-dom';
 
 function Objectif  (objectif_name)  {
     const [name, setName] = useState("");
@@ -9,46 +10,59 @@ function Objectif  (objectif_name)  {
     const [description, setDescription] = useState("");
     const [type, setType] = useState("");
     const [clique, setClique] =useState("")
+    const [id, setId]=useState("")
+    let jsonToSend = {}
+    const navigate = useNavigate();
 
     useEffect(() => {
         objectif_name = "Manger moins de viande"
 
-        let id = "635ba113935a45c92d42fe3d";
-        axios.get(`http://localhost:3001/user/${id}`, { params: { "id": id } }).then(res => {
+        let idUser = "635ba113935a45c92d42fe3d";
+        axios.get(`http://localhost:3001/user/${idUser}`, { params: { "id": idUser } }).then(res => {
             for (let i=0 ; i < res.data.objectifs.length;i++){
-                if (res.data.objectifs[i].name==objectif_name){
+                if (res.data.objectifs[i].name===objectif_name){
                     setName(res.data.objectifs[i].name)
                     setFrequence(res.data.objectifs[i].frequence)
                     setPrive(res.data.objectifs[i].prive)
                     i= res.data.objectifs.length
                 }
             }
-
         })
         axios.get(`http://localhost:3001/objectif/${objectif_name}`,{ params: { "name": objectif_name } }).then(res => {
             setDescription(res.data.description)
             setType(res.data.type)
+            setId(res.data._id)
         }).catch(err => console.log(err));
     }, []);
 
     function truc(){
         setClique(!clique)
     }
-    const sendData = async (e) =>{
-    /*         console.log(name)
-            console.log(frequence)
-            console.log(type)
-            console.log(description) */
+
+    function sendData (){
         if (prive === "False"){
             setPrive(false)
         }
         else if(prive === "True"){
             setPrive(true)
         }
-        console.log(prive)
+        jsonToSend = {"_id":id, "type":type, "objectif":name,"description":description}
+        axios.put(`http://localhost:3001/objectif/${id}`,jsonToSend)
+        /*  
+        console.log(name)
+        console.log(frequence)
+        console.log(type)
+        console.log(description) 
+        */
+       navigateToHome()
     }
 
-    if (clique){
+    const navigateToHome = () => {
+        // 👇️ navigate to /contacts
+        navigate('/profil');
+      };
+      
+      if (clique){
         return(
             <div>
                 <form className='form' onSubmit={sendData}>

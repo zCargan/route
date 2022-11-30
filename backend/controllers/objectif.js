@@ -1,4 +1,5 @@
 const Objectif = require('../models/objectif')
+const ObjectId = require('mongodb').ObjectID;
 
 
 exports.createObjectif = (req, res, next) => {
@@ -39,12 +40,13 @@ exports.getOneObjectif = (req, res, next) => {
   
 exports.modifyObjectif = (req, res, next) => {
     const obj = new Objectif({
-      _id: req.params.id,
+      _id: ObjectId(req.body._id),
       type: req.body.type,
       objectif: req.body.objectif,
       description: req.body.description,
     });
-    Objectif.updateOne({_id: req.params.id}, obj).then(
+    let id_json = {_id: ObjectId(req.body._id)}
+    Objectif.updateOne(id_json, {$set:obj}).then(
       () => {
         res.status(201).json({
           message: 'Objectif updated successfully!'
