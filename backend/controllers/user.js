@@ -122,7 +122,6 @@ exports.getCookie = (req, res) => {
             // httpOnly: true,
             sameSite: 'lax'
         });
-        console.log(res.cookie)
         return res.status(200).json(response);
     }
     else{
