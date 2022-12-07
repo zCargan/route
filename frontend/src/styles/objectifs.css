@@ -8,7 +8,7 @@
     position: relative;
 }
 
-ul{
+ul {
     display: inline-block;
     width: 100%
 }
@@ -20,17 +20,17 @@ ul{
     transition: all 0.3s ease-out;
     border-radius: 110%;
     position: absolute;
-    bottom:0.5%;
+    bottom: 0.5%;
     right: 0.5%;
 }
 
-.fa-circle-plus:hover{
+.fa-circle-plus:hover {
     color: #d9d9d9;
     background-color: #3d3939;
     cursor: pointer;
 }
 
-.titre-objectifs{
+p {
     margin: 0;
     padding-right: 40px;
 }
@@ -42,24 +42,25 @@ ul{
     transition: all 0.3s ease-out;
     border-radius: 110%;
     position: absolute;
-    bottom:0.5%;
+    bottom: 0.5%;
     right: 0.5%;
 }
 
-.fa-circle-xmark:hover{
+.fa-circle-xmark:hover {
     color: #d9d9d9;
     background-color: #3d3939;
     cursor: pointer;
 }
 
 
-.username, .email{
+.username,
+.email {
     padding-right: 0;
 }
 
-.searchedObjectifsButton{
+.searchedObjectifsButton {
     background-color: #980012;
-    transition: all 0.3s ease-out; 
+    transition: all 0.3s ease-out;
     color: #d9d9d9;
     width: 25%;
     margin: 0;
@@ -71,16 +72,16 @@ ul{
     border-radius: 10px;
 }
 
-.searchedObjectifsButton:hover{
+.searchedObjectifsButton:hover {
     background-color: #d9d9d9;
-    color:#980012;
-    transition: all 0.3s ease-out; 
+    color: #980012;
+    transition: all 0.3s ease-out;
     cursor: pointer;
     border-radius: 10px;
 }
 
-.searchedObjectifs{
-    width:25%;
+.searchedObjectifs {
+    width: 25%;
     height: 100%;
     float: right;
     margin: 0;
@@ -88,15 +89,19 @@ ul{
     border: none;
 }
 
-.searchedObjectifs:focus{
-    border:none
+.searchedObjectifs:focus {
+    border: none
 }
 
-.search-bar{
+.search-bar {
     display: flex;
     justify-content: center;
     width: 100%;
     height: 3%;
     text-align: center;
     align-items: center;
+}
+
+#img_oeil {
+    size: 1px
 }

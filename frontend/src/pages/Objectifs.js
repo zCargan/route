@@ -19,6 +19,7 @@ export function testajouterObjectifs(params) {
 }
 
 function Objectifs() {
+
     const [data, setData] = useState([]);
     const [baseData, setBaseData] = useState([]);
     const [searchedObjectifs, setSearchedObjectifs] = useState("")
@@ -32,7 +33,8 @@ function Objectifs() {
             for (let i = 0; i < res.data.objectifs.length; i++){
                 nouveauxObjectifs.push(res.data.objectifs[i])
             }
-        })});
+        })
+    });
 
     function ajouterObjectifs(params) {
         if (params === "") {
@@ -44,7 +46,7 @@ function Objectifs() {
             alert("L'objectif choisi a déjà été ajouté !")
             return
         }
-        query_choisie = {"id" : document.cookie, objectifs : nouveauxObjectifs}
+        query_choisie = { "id": document.cookie, objectifs: nouveauxObjectifs }
         console.log(query_choisie)
         axios.post("http://localhost:3001/user/objectif", query_choisie).then(alert("Objectif ajouté avec succès !"))
         window.location.reload(false);
@@ -55,8 +57,8 @@ function Objectifs() {
         setData(baseData)
 
         e.preventDefault();
-        const infos  = {
-            params : {
+        const infos = {
+            params: {
                 objectif: searchedObjectifs
             }
         }
@@ -65,7 +67,7 @@ function Objectifs() {
             console.log(baseData[i].objectif)
             if (searchedObjectifs === "") {
                 newData.push(baseData[i])
-            } else if (baseData[i].objectif.toLowerCase().includes(searchedObjectifs.toLowerCase())){
+            } else if (baseData[i].objectif.toLowerCase().includes(searchedObjectifs.toLowerCase())) {
                 newData.push(baseData[i])
                 console.log(baseData[i].objectif.toLowerCase().includes(searchedObjectifs.toLowerCase()))
             }
@@ -75,21 +77,22 @@ function Objectifs() {
 
     useEffect(() => {
         axios.get('http://localhost:3001/objectif').then(res => {
-           setData(res.data)
-           setBaseData(res.data)
+            setData(res.data)
+            setBaseData(res.data)
         }).catch(err => console.log(err));
     }, [])
     return (
         <>
-        <div className="search-bar">
-            <input type="text" placeholder="Recherche" className="searchedObjectifs" onChange={(e) => setSearchedObjectifs(e.target.value)}></input>
-            <p className="searchedObjectifsButton" onClick={rechercherObjectifs}>Rechercher</p>
-        </div>
-        <ul>
-            {data.map((objectif) =>
-                <li key={objectif._id} className="objectifs"> <p className="titre-objectifs">{objectif.objectif}</p><i className="fas fa-circle-plus" onClick={() => {ajouterObjectifs(objectif)}}></i></li>
-            )}
-        </ul>
+            <div className="search-bar">
+                <input type="text" placeholder="Recherche" className="searchedObjectifs" onChange={(e) => setSearchedObjectifs(e.target.value)}></input>
+                <p className="searchedObjectifsButton" onClick={rechercherObjectifs}>Rechercher</p>
+            </div>
+            <ul>
+                <p>{nouveauxObjectifs}</p>
+                {data.map((objectif) =>
+                    <li key={objectif._id} className="objectifs"> <p className="titre-objectifs">{test}</p><i className="fas fa-circle-plus" onClick={() => { ajouterObjectifs(objectif) }}></i></li>
+                )}
+            </ul>
         </>
     );
 }

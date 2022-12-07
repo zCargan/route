@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "../styles/connection.css"
 import "../styles/App.css"
+import { useNavigate } from 'react-router-dom';
 //import { response } from '../../../backend/app';
 
 const Connection = () => {
@@ -15,13 +16,13 @@ const Connection = () => {
     const navigateToHome = () => {
         // 👇️ navigate to /contacts
         navigate('/home');
-      };
+    };
 
     const login_verfif = async (e) => {
         e.preventDefault();
         let values = {
-            email :email,
-            mdp :mdp
+            email: email,
+            mdp: mdp
         };
         axios.post("http://localhost:3001/user/login", values, { withCredentials: true })
             .then(response => {
@@ -30,8 +31,6 @@ const Connection = () => {
                 window.location.reload(false)
             });
     }
-
-
     return (
 
         <div id="connection">
@@ -46,10 +45,10 @@ const Connection = () => {
                     <input type="password" placeholder='Mot de passe' onChange={(e) => setMdp(e.target.value)} />
                 </div>
                 <div className="text_zone_button" onClick={login_verfif}>
-                        Connexion
+                    Connexion
                 </div>
                 <div className="text_zone_button">
-                        Mot de passe oublié ?
+                    Mot de passe oublié ?
                 </div>
             </form>
         </div>

@@ -1,0 +1,14 @@
+.text_rgpd {
+    color: #d9d9d9;
+    position: absolute;
+    left: 43%;
+    bottom: 30px;
+}
+
+.text_rgpd:hover {
+    color: #d9d9d9;
+    position: absolute;
+    left: 43%;
+    bottom: 30px;
+    font-weight: bold;
+}

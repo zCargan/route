@@ -1,19 +1,33 @@
-import React from 'react';
-import BarreRecherche from '../components/BarreDeRecherche';
-
-
+import React from 'react'
+import "../styles/default.css"
+import ReactPlayer from 'react-player'
+import RGPD from '../components/RGPD';
 
 
 const Default = () => {
 
+    function test() {
+        console.log("hello")
+    }
+
     return (
         <div className='div_global'>
             <div>
-            <BarreRecherche/>                <p className='bienvenue_text'>
-                    Bienvenue sur la page d'accueil du site
+                <p className='bienvenue_text'>
+                    NEWME
                 </p>
             </div>
-        </div>
+            <div>
+                <p>
+                    NewMe est un projet étudiant dans le cadre d'un cours.
+
+                    Nous avons voulu pousser la communauté 
+                </p>
+            </div>
+            <div>
+                <RGPD />
+            </div>
+        </div >
     );
 };
 

@@ -8,21 +8,38 @@ import { useNavigate } from 'react-router-dom'
 import Popup from "reactjs-popup";
 import Ville from '../components/Ville'
 
-export function checkIfHigherThan0(number){
-    if(Number.isInteger(number)){
+export function checkIfHigherThan0(number) {
+    if (Number.isInteger(number)) {
         return number >= 0
     }
-    else{
+    else {
         return "Ce n'est pas un nombre"
     }
 }
+
+
 function Profil() {
-    
+
     const [data, setData] = useState([]);
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
 
+
+    function function1() {
+        console.log(data)
+    }
+
+    function supprimerObjectifs(objectifToDelete, data) {
+        let arrayObjectif = data;
+        let myIndex = arrayObjectif.indexOf(objectifToDelete);
+        if (checkIfHigherThan0(myIndex)) {
+            arrayObjectif.splice(myIndex, 1);
+        }
+        let query_choisie = { "id": document.cookie, objectifs: arrayObjectif }
+        axios.post("http://localhost:3001/user/objectif", query_choisie).then(alert("Objectif supprimé avec succès !"))
+        window.location.reload(false);
+    };
 
     let nouveauxObjectifs = [];
 
@@ -85,7 +102,7 @@ function Profil() {
         <h2 className='objectifs-profil'>Mes objectifs</h2>
             <ul>
                 {data.map((objectif) =>
-                    <li key={objectif} className="objectifs"> <p className="titre-objectifs">{objectif}</p><i className="fa-solid fa-circle-xmark" onClick={() => {supprimerObjectifs(objectif, data)}}></i></li>
+                    <li key={objectif} className="objectifs"> <p className="titre-objectifs">{objectif}</p> <i class="fa-solid fa-eye" onClick={() => { function1() }}></i> <i className="fa-solid fa-circle-xmark" onClick={() => { supprimerObjectifs(objectif, data) }}></i></li>
                 )}
             </ul>
             <p className="deconnexion" onClick={deconnexion}>
