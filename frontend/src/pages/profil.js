@@ -18,20 +18,24 @@ export function checkIfHigherThan0(number){
 }
 function Profil() {
     
-    const [data, setData] = useState([]);
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-
-
-    let nouveauxObjectifs = [];
-
+    const [objectifs, setObjectifs] = useState([])
     const navigateToHome = () => {
         navigate('/home');
     };
 
-    function supprimerObjectifs(objectifToDelete, data) {
-        let arrayObjectif=data;
+    useEffect(() => {
+        let id = document.cookie.split("=")[1];
+        axios.get(`http://localhost:3001/user/${id}`, { params: { "id": document.cookie } }).then(res => {
+            setObjectifs(res.data.objectifs)
+            setUsername(res.data.username)
+            setEmail(res.data.email)
+        })}, []);
+
+    function supprimerObjectifs(objectifToDelete, objectifs) {
+        let arrayObjectif=objectifs;
         let myIndex = arrayObjectif.indexOf(objectifToDelete);
         if (checkIfHigherThan0(myIndex)) {
             arrayObjectif.splice(myIndex, 1);
@@ -40,17 +44,8 @@ function Profil() {
         axios.post("http://localhost:3001/user/objectif", query_choisie).then(alert("Objectif supprimé avec succès !"))
         window.location.reload(false);
     };
-    useEffect(() => {
-        let id = document.cookie.split("=")[1];
-        axios.get(`http://localhost:3001/user/${id}`, { params: { "id": document.cookie } }).then(res => {
-            for (let i = 0; i < res.data; i++) {
-                nouveauxObjectifs.push(res.data.objectifs[i])
-            }
-            setData(res.data.objectifs)
-            setUsername(res.data.username)
-            setEmail(res.data.email)
 
-        })}, []);
+
     function deconnexion(){
         axios.get('http://localhost:3001/deletecookie', { withCredentials: true })
             .then(res => {
@@ -84,8 +79,8 @@ function Profil() {
             </div>
         <h2 className='objectifs-profil'>Mes objectifs</h2>
             <ul>
-                {data.map((objectif) =>
-                    <li key={objectif} className="objectifs"> <p className="titre-objectifs">{objectif}</p><i className="fa-solid fa-circle-xmark" onClick={() => {supprimerObjectifs(objectif, data)}}></i></li>
+                {objectifs.map((objectif) => 
+                    { return <li  className="objectifs"> <p className="titre-objectifs">{objectif.name}</p><i className="fa-solid fa-circle-xmark" onClick={() => {supprimerObjectifs(objectif, objectifs)}}></i></li>}
                 )}
             </ul>
             <p className="deconnexion" onClick={deconnexion}>

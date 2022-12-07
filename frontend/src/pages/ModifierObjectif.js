@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import '../styles/objectif.css'
-import { useNavigate } from 'react-router-dom';
+import '../styles/modifierObjectif.css'
+import { json, useNavigate } from 'react-router-dom';
 
 function Objectif  (objectif_name)  {
     const [name, setName] = useState("");
@@ -14,11 +14,14 @@ function Objectif  (objectif_name)  {
     const [shareBool, setShareBool] = useState(false)
     const [onProfileBool, setOnProfileBool] = useState(false)
     const [data, setData] = useState([])
+    let newObjectif = {}
     let jsonToSend = {}
     const navigate = useNavigate();
     let id = "635ba113935a45c92d42fe3d";
     objectif_name = "Manger moins de viande"
-
+    const navigateToProfil = () => {
+        navigate('/profil');
+      };
     useEffect(() => {
 
         axios.get(`http://localhost:3001/user/${id}`, { params: { "id": id } }).then(res => {
@@ -45,6 +48,10 @@ function Objectif  (objectif_name)  {
                 }
             }
         })
+        axios.get(`http://localhost:3001/user/${id}`).then(res => {
+            setData(res.data.objectifs)
+            console.log(res.data.objectifs)
+         })
     }, []);
 
     function truc(){
@@ -52,25 +59,32 @@ function Objectif  (objectif_name)  {
     }
 
     function sendData (){
-        axios.get(`http://localhost:3001/user/${id}`).then(res => {
-           setData(res.data.objectifs)
-        })
         let dataToSend =[]
+        newObjectif = { "name":name,"description":description, "type":type, "frequence":frequence, "onProfile":onProfileBool, "share":shareBool }
         for (let i=0; i<data.length ;i++){
             if(data[i].name !== name){
                 dataToSend.push(data[i])
             }
         }
-        jsonToSend = {"type":type, "name":name,"description":description, "frequence":frequence, "onProfile":onProfile, "share":share }
-        dataToSend.push(jsonToSend)
-        axios.post(`http://localhost:3001/user/objectif`, dataToSend)
-/*        navigateToHome()
+        if (shareBool == "true" || shareBool == "True"){
+            setShareBool(true)
+        }
+        else{
+            setShareBool(false)
+        }
+        if (onProfileBool == "true" || onProfileBool == "True"){
+            setOnProfileBool(true)
+        }
+        else{
+            setOnProfileBool(false)
+        }
+        dataToSend.push(newObjectif)
+        jsonToSend = {"id" : id, "objectifs" : dataToSend}
+        axios.post(`http://localhost:3001/user/objectif`, jsonToSend)
+/*         navigateToProfil()
  */    }
 
-    const navigateToHome = () => {
-        // 👇️ navigate to /contacts
-        navigate('/profil');
-      };
+
       
       if (clique){
         return(
@@ -94,17 +108,17 @@ function Objectif  (objectif_name)  {
                     <option value="Mensuel">Mensuel</option>
                     </select>
                     <br></br>
-                    <div onChange={(e) => setOnProfile(e.target.value)}>
+                    <div onChange={(e) => setOnProfileBool(e.target.value)}>
                     <label>Rendre L'objectif visible sur votre profil ? Oui</label>
                     <input type="radio" name="onProfile" defaultChecked={onProfileBool} value="True"></input>
                     <label>Non</label>
                     <input type="radio" name="onProfile" defaultChecked={!onProfileBool} value="False"></input>
                     </div>
-                    <div onChange={(e) => setShare(e.target.value)}>
+                    <div onChange={(e) => setShareBool(e.target.value)}>
                     <label>Partager votre objectif aux autres utilisateurs ? Oui</label>
-                    <input type="radio" name="share" defaultChecked={shareBool} value="True"></input>
+                    <input type="radio" name="share" defaultChecked={shareBool} value="true"></input>
                     <label>Non</label>
-                    <input type="radio" name="share" defaultChecked={!shareBool} value="False"></input>
+                    <input type="radio" name="share" defaultChecked={!shareBool} value="false"></input>
                     </div>
                     <input type="button" className="button_submit" value="Valider" onClick={sendData}/>
                     <br></br>
