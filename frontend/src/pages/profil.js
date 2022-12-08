@@ -26,7 +26,6 @@ function Profil() {
         navigate('/home');
     };
     const navigateToModifierObjectif = (objectif_name) => {
-        console.log(objectif_name)
         navigate('/modifierObjectif', {state:{name:objectif_name}});
     };
     useEffect(() => {
@@ -53,7 +52,6 @@ function Profil() {
         axios.get('http://localhost:3001/deletecookie', { withCredentials: true })
             .then(res => {
                 document.cookie = ""
-                console.log(document.cookie)
                 navigateToHome()
                 window.location.reload(false)
             }

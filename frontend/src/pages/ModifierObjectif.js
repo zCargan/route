@@ -8,11 +8,9 @@ function Objectif  ()  {
     const location = useLocation();
     const [name, setName] = useState("");
     const [frequence, setFrequence] = useState("");
-    const [onProfile, setOnProfile] = useState("");
     const [description, setDescription] = useState("");
     const [type, setType] = useState("");
     const [clique, setClique] =useState("")
-    const [share, setShare] = useState("")
     const [shareBool, setShareBool] = useState(false)
     const [onProfileBool, setOnProfileBool] = useState(false)
     const [data, setData] = useState([])
@@ -32,23 +30,17 @@ function Objectif  ()  {
                     setName(res.data.objectifs[i].name)
                     setFrequence(res.data.objectifs[i].frequence)
                     if (res.data.objectifs[i].onProfile){
-                        setOnProfile("oui")
                         setOnProfileBool(true)
-                    } else {
-                        setOnProfile("non")
                     }
                     if (res.data.objectifs[i].share ){
-                        setShare("oui")
                         setShareBool(true)
-                    } else {
-                        setShare("non")
                     }
-                    // setOnProfile(res.data.objectifs[i].onProfile)
                     setDescription(res.data.objectifs[i].description)
                     setType(res.data.objectifs[i].type)
                     i= res.data.objectifs.length
                 }
             }
+
         })
         axios.get(`http://localhost:3001/user/${id}`).then(res => {
             setData(res.data.objectifs)
@@ -60,6 +52,8 @@ function Objectif  ()  {
     }
 
     function sendData (){
+        console.log(onProfileBool)
+        console.log(shareBool)
         let dataToSend =[]
         newObjectif = { "name":name,"description":description, "type":type, "frequence":frequence, "onProfile":onProfileBool, "share":shareBool }
         for (let i=0; i<data.length ;i++){
@@ -67,26 +61,27 @@ function Objectif  ()  {
                 dataToSend.push(data[i])
             }
         }
-        if (shareBool === "true" || shareBool === "True"){
-            setShareBool(true)
-        }
-        else{
-            setShareBool(false)
-        }
-        if (onProfileBool === "true" || onProfileBool === "True"){
-            setOnProfileBool(true)
-        }
-        else{
-            setOnProfileBool(false)
-        }
         dataToSend.push(newObjectif)
         jsonToSend = {"id" : id, "objectifs" : dataToSend}
         axios.post(`http://localhost:3001/user/objectif`, jsonToSend)
         navigateToProfil()
      }
-
-
-      
+     function changeOnProfileBool(value){
+        if (value === "true"){
+            setOnProfileBool(true)
+        }
+        else{
+            setOnProfileBool(false)
+        }
+     }
+     function changeShareBool(value){
+        if (value === "true"){
+            setShareBool(true)
+        }
+        else{
+            setShareBool(false)
+        }
+     }
       if (clique){
         return(
             <div>
@@ -109,13 +104,13 @@ function Objectif  ()  {
                     <option value="Mensuel">Mensuel</option>
                     </select>
                     <br></br>
-                    <div onChange={(e) => setOnProfileBool(e.target.value)}>
+                    <div onChange={(e) => changeOnProfileBool(e.target.value)}>
                     <label>Rendre L'objectif visible sur votre profil ? Oui</label>
-                    <input type="radio" name="onProfile" defaultChecked={onProfileBool} value="True"></input>
+                    <input type="radio" name="onProfile" defaultChecked={onProfileBool} value="true"></input>
                     <label>Non</label>
-                    <input type="radio" name="onProfile" defaultChecked={!onProfileBool} value="False"></input>
+                    <input type="radio" name="onProfile" defaultChecked={!onProfileBool} value="false"></input>
                     </div>
-                    <div onChange={(e) => setShareBool(e.target.value)}>
+                    <div onChange={(e) => changeShareBool(e.target.value)}>
                     <label>Partager votre objectif aux autres utilisateurs ? Oui</label>
                     <input type="radio" name="share" defaultChecked={shareBool} value="true"></input>
                     <label>Non</label>
@@ -140,9 +135,9 @@ function Objectif  ()  {
                 <br></br>
                 Fréquence : {frequence}
                 <br></br>
-                Afficher sur votre profil ? : {onProfile}
+                Afficher sur votre profil ? : {onProfileBool}
                 <br></br>
-                Partager avec les autres utilisateur : {share}
+                Partager avec les autres utilisateur : {shareBool}
                 <br></br>
                 <button onClick={() => {truc();}} className="button_form">Modifier</button>
                 <br></br>
