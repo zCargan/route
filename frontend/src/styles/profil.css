@@ -1,35 +1,37 @@
-.deconnexion, .modifierProfil{
+.deconnexion,
+.modifierProfil {
     border-radius: 10px;
     margin: 5px;
     width: 60%;
     background-color: #980012;
     margin-left: 20%;
-    transition: all 0.3s ease-out; 
+    transition: all 0.3s ease-out;
     text-align: center;
     color: #d9d9d9;
     padding: 3px;
 }
 
-.modifierProfil{
+.modifierProfil {
     border: none;
     margin: 0;
 }
 
-.deconnexion:hover ,.modifierProfil:hover{
+.deconnexion:hover,
+.modifierProfil:hover {
     background-color: #d9d9d9;
-    color:#980012;
-    transition: all 0.3s ease-out; 
+    color: #980012;
+    transition: all 0.3s ease-out;
     cursor: pointer;
 }
 
-.profil{
+.profil {
     background-color: #a09f9f;
     border-radius: 10px;
     padding: 3%;
     padding-top: 0;
 }
 
-/* .formulaireProfil{
+.formulaireProfil {
     background-color: #a09f9f;
     border: 3px solid black;
     border-radius: 10px;
@@ -38,44 +40,25 @@
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 } */
 
-.objectifs-profil{
+.objectifs-profil {
     background-color: #a09f9f;
     border-radius: 10px;
     padding: 1%;
 }
 
-.fa-circle-user{
-    font-size: 750%;
-    display: grid;
+.fa-circle-user {
+    font-size: 7rem;
+    display: flex;
+    justify-content: left;
     width: 10%;
 }
 
-.text{
+.text {
     position: absolute;
-    top:10%;
-    left:37.5%;
-    font-size: 150%;
+    top: 15%;
+    left: 40%;
 }
 
-.popup-content {
-    margin: auto;
-    background-color: #a09f9f;
-    border-radius: 10px;
-    width: 50%;
-    padding: 5px;
-    background-blend-mode: darken;
-  }
-  .popup-arrow {
-    color: #a09f9f;
-  }
-  [role='tooltip'].popup-content {
-    width: 200px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
-  }
-  .popup-overlay {
-    background: rgba(0, 0, 0, 0.5);
-  }
-  [data-popup='tooltip'].popup-overlay {
-    background: transparent;
-  }
-  
+#img_oeil {
+    size: 1px
+}

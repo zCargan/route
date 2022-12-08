@@ -77,11 +77,6 @@ function Navbar() {
                             Profil
                         </NavLink>
                     </li>
-                    {/* <li className='nav-item'>
-                        <NavLink to="/inscription" className={(state) => state.isActive ? 'nav-links-mobile-active' : 'nav-links-mobile'}>
-                            Sign Up
-                        </NavLink>
-                    </li> */}
                 </ul>
             </div>
         </nav>

@@ -13,11 +13,9 @@ xhr.withCredentials = true;
 xhr.send(null);
 
 exports.createUser = (req, res) => {
-  console.log(req.body)
   const test = new User({
       ...req.body
   })
-  console.log(test)
   test.save()
       .then(() => res.status(201).json({ message: 'utilisateur ajouté' }))
       .catch(error => res.status(400).json({ error }));
