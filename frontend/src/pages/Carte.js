@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import { layer, Map, Layers } from "react-openlayers"
-<<<<<<< HEAD
-=======
-import BulleProfil from '../components/BulleProfil';
->>>>>>> 9be27f1 (ajout d'un component profi)
 import "../styles/map.css"
 import Localisation from '../components/Localisation';
 import axios from 'axios';
@@ -43,9 +39,6 @@ const Carte = () => {
 
     return (
         <div>
-            <div>
-                <BulleProfil />
-            </div>
             <div>
                 <h1>
                     Trouver des gens prêt de chez vous !

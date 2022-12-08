@@ -1,13 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useFetcher } from 'react-router-dom';
 import "../styles/ville.css"
 
 const Ville = () => {
     // ============================================================ CONSTANTES ============================================================
     const [nouvelle_ville, setNouvelleVille] = useState("");
     const [villes, setVilles] = useState([]);
-    const [villeUser, setVilleUser] = useState("");
+    // const [villeUser, setVilleUser] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -51,7 +50,7 @@ const Ville = () => {
         axios
             .put(`http://localhost:3001/user/${id}`, donnees_a_jour)
             .then(response => {
-                if (response.status == 201) {
+                if (response.status === 201) {
                     alert("Profil modifié")
                 } else {
                     alert("Une erreur à eu lieu lors de la modification du profil")
