@@ -10,7 +10,6 @@ import Carte from './pages/Carte';
 import Rgpd from './pages/Rgpd'
 
 import './styles/App.css'
-import ProfilUsers from './pages/ProfilUser';
 import NouvelObjectif from './components/NouvelObjectif';
 
 const App = () => {
