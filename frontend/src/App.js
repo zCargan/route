@@ -11,6 +11,8 @@ import Rgpd from './pages/Rgpd'
 
 import './styles/App.css'
 import NouvelObjectif from './components/NouvelObjectif';
+import ProfilUser from './pages/ProfilUsers';
+import BarreRecherche from './components/BarreDeRecherche'
 
 const App = () => {
   let connecte = false
@@ -37,6 +39,8 @@ const App = () => {
             <Route path="/carte" element={connecte ? <Carte /> : <Navigate to="/inscription" />} />
             <Route path='/nouvel_objectif' element={connecte ? <NouvelObjectif /> : <Navigate to="/inscription" />} />
             <Route path='/rgpd' element={<Rgpd />} />
+            <Route path='/profilUser' element={<ProfilUser />} />
+            <Route path='/re' element={<BarreRecherche />} />
           </Routes>
         </div>
       </BrowserRouter>
