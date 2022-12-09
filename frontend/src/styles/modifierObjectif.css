@@ -1,0 +1,10 @@
+.form{
+    margin: 3%;
+    padding: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #a09f9f;
+    width: 100%;
+    border-radius: 30px;
+    position: center;
+}

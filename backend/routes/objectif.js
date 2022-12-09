@@ -7,7 +7,7 @@ const objectifCtrl = require('../controllers/objectif');
 
 router.post('/', objectifCtrl.createObjectif)
 
-router.get('/:id', objectifCtrl.getOneObjectif)
+router.get('/:name', objectifCtrl.getOneObjectif)
  
 router.put('/:id', objectifCtrl.modifyObjectif)
 

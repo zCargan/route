@@ -8,6 +8,7 @@ import Default from './pages/default';
 import Profil from './pages/Profil';
 import Carte from './pages/Carte';
 import Rgpd from './pages/Rgpd'
+import ModifierObjectif from './pages/ModifierObjectif';
 
 import './styles/App.css'
 import NouvelObjectif from './components/NouvelObjectif';
@@ -40,7 +41,7 @@ const App = () => {
             <Route path='/nouvel_objectif' element={connecte ? <NouvelObjectif /> : <Navigate to="/inscription" />} />
             <Route path='/rgpd' element={<Rgpd />} />
             <Route path='/profilUser' element={<ProfilUser />} />
-            <Route path='/re' element={<BarreRecherche />} />
+            <Route path="/modifierObjectif" element={<ModifierObjectif/>}/>
           </Routes>
         </div>
       </BrowserRouter>
