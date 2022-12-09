@@ -40,7 +40,7 @@ exports.getOneUser = (req, res, next) => {
 exports.updateUserObjectif = (req, res, next) => {
   let keys = Object.keys(req.body)
   let values = Object.values(req.body)
-  let id_value = values[0].split("=")[1];
+  let id_value = values[0];
   let id_json = {"_id":ObjectId(id_value)}
   let objectifs_key = keys[1];
   let objectifs_value = values[1];
