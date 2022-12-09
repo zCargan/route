@@ -1,0 +1,49 @@
+.all{
+    background-color: #fafafa;
+    width: 300px;
+    margin: 10px auto;
+    box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.7);
+    border-radius: 5px;
+}
+
+.profilHeader{
+    overflow: hidden;
+    width: 100%;
+    max-height: 200px;
+}
+
+.userName .city{
+    width: 85%;
+    margin: 35px auto;
+
+}
+
+.userName{
+    font-size: 25px;
+    margin-bottom: 0;
+    color: #303F9F;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.city{
+    font-size: 14px;
+    margin-top: 0;
+    color: #FF5252;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+
+.obj{
+    margin: 5px 0;
+    text-transform: uppercase;
+}
+
+.listeObj{
+    margin-left: 19px;
+}
+
+.objectifsUser{
+    margin-bottom: 10px;
+}
+
