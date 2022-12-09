@@ -27,3 +27,4 @@ router.post('/find', userCtrl.getUserCity)
 router.put('/follow/:id', userCtrl.updateUserFollowers)
 
 module.exports = router;
+

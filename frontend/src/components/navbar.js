@@ -7,7 +7,7 @@ function Navbar() {
     const [click, setClick] = useState(false);
 
     const handleClick = () => setClick(!click);
-    if (document.cookie==''){
+    if (document.cookie === ''){
         return (
             <nav className={click ? 'navbar-active' : 'navbar'}>
                 <div className='navbar-container'>

@@ -198,9 +198,7 @@ exports.getAllUser = (req, res, next) => {
 
 exports.getUserCity = (req, res) => {
   let ville = req.body.city;
-  console.log(ville)
   User.find({ "city": ville }).then(response => {
       res.status(200).json(response)
-      console.log(response)
   })
 }
