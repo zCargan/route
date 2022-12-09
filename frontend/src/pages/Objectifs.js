@@ -19,7 +19,6 @@ export function testajouterObjectifs(params) {
 }
 
 function Objectifs() {
-
     const [data, setData] = useState([]);
     const [baseData, setBaseData] = useState([]);
     const [searchedObjectifs, setSearchedObjectifs] = useState("")
@@ -39,8 +38,7 @@ function Objectifs() {
             for (let i = 0; i < res.data.objectifs.length; i++){
                 nouveauxObjectifs.push(res.data.objectifs[i])
             }
-        })
-    });
+        })});
 
     function ajouterObjectifs(params) {
         let id = document.cookie.split("=")[1];
@@ -98,15 +96,15 @@ function Objectifs() {
         setData(baseData)
 
         e.preventDefault();
-        const infos = {
-            params: {
+        const infos  = {
+            params : {
                 objectif: searchedObjectifs
             }
         }
         for (let i = 0; i < baseData.length; i++) {
             if (searchedObjectifs === "") {
                 newData.push(baseData[i])
-            } else if (baseData[i].objectif.toLowerCase().includes(searchedObjectifs.toLowerCase())) {
+            } else if (baseData[i].objectif.toLowerCase().includes(searchedObjectifs.toLowerCase())){
                 newData.push(baseData[i])
             }
         }
@@ -115,22 +113,21 @@ function Objectifs() {
 
     useEffect(() => {
         axios.get('http://localhost:3001/objectif').then(res => {
-            setData(res.data)
-            setBaseData(res.data)
+           setData(res.data)
+           setBaseData(res.data)
         }).catch(err => console.log(err));
     }, [])
     return (
         <>
-            <div className="search-bar">
-                <input type="text" placeholder="Recherche" className="searchedObjectifs" onChange={(e) => setSearchedObjectifs(e.target.value)}></input>
-                <p className="searchedObjectifsButton" onClick={rechercherObjectifs}>Rechercher</p>
-            </div>
-            <ul>
-                <p>{nouveauxObjectifs}</p>
-                {data.map((objectif) =>
-                    <li key={objectif._id} className="objectifs"> <p className="titre-objectifs">{test}</p><i className="fas fa-circle-plus" onClick={() => { ajouterObjectifs(objectif) }}></i></li>
-                )}
-            </ul>
+        <div className="search-bar">
+            <input type="text" placeholder="Recherche" className="searchedObjectifs" onChange={(e) => setSearchedObjectifs(e.target.value)}></input>
+            <p className="searchedObjectifsButton" onClick={rechercherObjectifs}>Rechercher</p>
+        </div>
+        <ul>
+            {data.map((objectif) =>
+                <li key={objectif._id} className="objectifs"> <p className="titre-objectifs">{objectif.objectif}</p><i className="fas fa-circle-plus" onClick={() => {ajouterObjectifs(objectif)}}></i></li>
+            )}
+        </ul>
         </>
     );
 }
