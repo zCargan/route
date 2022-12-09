@@ -111,7 +111,6 @@ exports.getCookie = (req, res) => {
   User.findOne({ email: req.body.email })
   .then(response =>  {
     if (!response) {
-    console.log("Utilisateur non trouvé !")
     return res.status(401).json({ error: 'Utilisateur non trouvé !' });
     }
     if (req.body.mdp == response.password){
@@ -125,7 +124,6 @@ exports.getCookie = (req, res) => {
         return res.status(200).json(response);
     }
     else{
-      console.log("Mot de passe incorrecte")
       return res.status(401).json({ error: 'Mot de passe incorrecte !' });
     }
   })
@@ -173,7 +171,6 @@ exports.getAllUser = (req, res, next) => {
     User.findOne({ email: req.body.email})
     .then(response => {
         if(!response){
-          console.log("Utilisateur non trouvé !")
           return res.status(401).json({ error: 'Utilisateur non trouvé !' });
         }
         if (req.body.mdp == response.password) {
@@ -184,12 +181,10 @@ exports.getAllUser = (req, res, next) => {
               // httpOnly: true,
               sameSite: 'lax'
           });
-          console.log('Cookie :' + req.signedCookie)
           return res.status(200).json(response);
       }
         else{
-          console.log("Mot de passe incorrecte")
-          return res.status(401).json({ error: 'Mot de passe incorrecte !' });
+          return res.status(401).json({ error: 'Mot de passe incorrect !' });
       }
 
     })
