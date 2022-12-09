@@ -18,44 +18,46 @@ export function checkIfHigherThan0(number){
 }
 function Profil() {
     
-    const [data, setData] = useState([]);
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-
-
-    let nouveauxObjectifs = [];
-
+    const [objectifs, setObjectifs] = useState([])
+    let arrayObjectif = [];
     const navigateToHome = () => {
         navigate('/home');
     };
-
-    function supprimerObjectifs(objectifToDelete, data) {
-        let arrayObjectif=data;
-        let myIndex = arrayObjectif.indexOf(objectifToDelete);
-        if (checkIfHigherThan0(myIndex)) {
-            arrayObjectif.splice(myIndex, 1);
-        }
-        let query_choisie = {"id" : document.cookie, objectifs : arrayObjectif}
-        axios.post("http://localhost:3001/user/objectif", query_choisie).then(alert("Objectif supprimé avec succès !"))
-        window.location.reload(false);
+    const navigateToModifierObjectif = (objectif_name) => {
+        navigate('/modifierObjectif', {state:{name:objectif_name}});
     };
     useEffect(() => {
         let id = document.cookie.split("=")[1];
         axios.get(`http://localhost:3001/user/${id}`, { params: { "id": document.cookie } }).then(res => {
-            for (let i = 0; i < res.data; i++) {
-                nouveauxObjectifs.push(res.data.objectifs[i])
-            }
-            setData(res.data.objectifs)
+            setObjectifs(res.data.objectifs)
             setUsername(res.data.username)
             setEmail(res.data.email)
-
         })}, []);
+
+    function supprimerObjectifs(objectifToDelete) {
+        let id = document.cookie.split("=")[1];
+        for (let i = 0; i < objectifs.length; i++) {
+            if (objectifToDelete === "") {
+                return "Veuillez entrer un objectif !"
+            }
+            else if (objectifs[i].name !== objectifToDelete.name) {
+                arrayObjectif.push(objectifs[i])
+            }
+        }
+        console.log(arrayObjectif)
+        let query_choisie = {"id" : id, "objectifs" : arrayObjectif}
+        axios.post("http://localhost:3001/user/objectif", query_choisie).then(alert("Objectif supprimé avec succès !"))
+        window.location.reload(false);
+    };
+
+
     function deconnexion(){
         axios.get('http://localhost:3001/deletecookie', { withCredentials: true })
             .then(res => {
                 document.cookie = ""
-                console.log(document.cookie)
                 navigateToHome()
                 window.location.reload(false)
             }
@@ -66,8 +68,8 @@ function Profil() {
         <>
             <div className='profil'>
                 <h2>Mon profil :</h2>
-                <i className="fa-solid fa-circle-user"></i>
                 <div className='text'>
+                    <i className="fa-solid fa-circle-user"></i>
                     <p className="username">Pseudonyme : {username}</p>
                     <p className="email">Adresse email : {email}</p>
                 </div>
@@ -83,9 +85,10 @@ function Profil() {
             </Popup>
             </div>
         <h2 className='objectifs-profil'>Mes objectifs</h2>
+
             <ul>
-                {data.map((objectif) =>
-                    <li key={objectif} className="objectifs"> <p className="titre-objectifs">{objectif}</p><i className="fa-solid fa-circle-xmark" onClick={() => {supprimerObjectifs(objectif, data)}}></i></li>
+                {objectifs.map((objectif) => 
+                    { return <li  className="objectifs" key={objectif.name}> <p className="titre-objectifs">{objectif.name}</p><i className="fa-solid fa-pencil" onClick={()=>{navigateToModifierObjectif(objectif.name)}}></i><i className="fa-solid fa-circle-xmark" onClick={() => {supprimerObjectifs(objectif)}}></i></li>}
                 )}
             </ul>
             <p className="deconnexion" onClick={deconnexion}>
