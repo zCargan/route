@@ -16,6 +16,19 @@
     /* float: right; */
 }
 
+.div_video {
+    background-color: #3d3939;
+    position: absolute;
+    top: 15%;
+    left: 21%;
+    width: 1000px;
+
+}
+
+.video {
+    width: 100%;
+}
+
 .fa-circle-user:hover {
     border-radius: 90%;
     border: 2px solid #3d3939;
@@ -31,4 +44,8 @@
 
 a {
     border: none;
+}
+
+.div_global {
+    background-color: #3d3939;
 }
