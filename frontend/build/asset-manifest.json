@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cb014089.css",
+    "main.js": "/static/js/main.2a28be61.js",
+    "static/media/logoNewMe.png": "/static/media/logoNewMe.00a82ddab9374fef2a55.png",
+    "static/media/logoNewMe2.ico": "/static/media/logoNewMe2.340a2bca48be680fd2fa.ico",
+    "index.html": "/index.html",
+    "main.cb014089.css.map": "/static/css/main.cb014089.css.map",
+    "main.2a28be61.js.map": "/static/js/main.2a28be61.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cb014089.css",
+    "static/js/main.2a28be61.js"
+  ]
+}
